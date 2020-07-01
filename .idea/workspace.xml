@@ -20,24 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d122a472-58ee-4a2b-8505-15e95560cd02" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/demo/scenrios.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo/web/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo/data/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ood/close_domain.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demo/data/ood/close_domain.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ood/open_domain.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demo/data/ood/open_domain.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/dust.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demo/data/raw/dust.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/restaurant.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demo/data/raw/restaurant.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/travel.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demo/data/raw/travel.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/weather.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demo/data/raw/weather.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/chat_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo/chat_server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kochat/app/kochat_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/kochat/app/kochat_api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kochat_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo/kochat_config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kochat_config.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -372,7 +356,7 @@
       <workItem from="1593230152086" duration="47815000" />
       <workItem from="1593291711820" duration="60148000" />
       <workItem from="1593526775645" duration="21103000" />
-      <workItem from="1593575844018" duration="24233000" />
+      <workItem from="1593575844018" duration="24400000" />
     </task>
     <servers />
   </component>
