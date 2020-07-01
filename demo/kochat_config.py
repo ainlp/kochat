@@ -83,15 +83,15 @@ INTENT = {
     # 그리드 서치를 사용할 때의 파라미터 목록
     'dist_param': {
         'n_neighbors': list(range(5, 15)),  # K값 범위 설정
-        'weights': ["uniform"],  # 'uniform' > 'distance'
-        'p': [2],  # 유클리드[2] = 맨하튼[1]
-        'algorithm': ['ball_tree']  # 'ball_tree' > 'kd_tree'
+        'weights': ["uniform"],  # ['uniform', 'distance']
+        'p': [2],  # [1, 2] (맨하튼 vs 유클리디언)
+        'algorithm': ['ball_tree']  # ['ball_tree', 'kd_tree']
     },
 
     # 폴백 디텍터 후보 (선형 모델을 추천합니다)
     'fallback_detectors': [
-        LogisticRegression(max_iter=10000),
-        LinearSVC(max_iter=10000)
+        LogisticRegression(max_iter=30000),
+        LinearSVC(max_iter=30000)
     ]
 }
 
@@ -99,8 +99,8 @@ ENTITY = {
     'model_lr': 1e-4,  # 엔티티 학습시 사용되는 모델 러닝레이트
     'loss_lr': 1e-4,  # 엔티티 학습시 사용되는 로스 러닝레이트 (아직 사용되지 않음)
     'weight_decay': 1e-4,  # 엔티티 학습시 사용되는 가중치 감쇠 정도
-    'epochs': 1000,  # 엔티티 학습 횟수
-    'd_model': 1,  # 엔티티 모델의 차원
+    'epochs': 2000,  # 엔티티 학습 횟수
+    'd_model': 512,  # 엔티티 모델의 차원
     'layers': 1,  # 엔티티 모델의 히든 레이어(층)의 수
     'masking': True,  # loss 계산시 패딩 마스크 여부
 

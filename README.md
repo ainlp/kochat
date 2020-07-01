@@ -3,8 +3,39 @@
 ![GitHub](https://img.shields.io/github/license/gusdnd852/kochat)
 [![CodeFactor](https://www.codefactor.io/repository/github/gusdnd852/kochat/badge)](https://www.codefactor.io/repository/github/gusdnd852/kochat)
 ![01_introduction_kochat](https://user-images.githubusercontent.com/38183241/85958000-1b8ed080-b9cd-11ea-99d6-69b472f3e2ff.jpg)
-<br><br><br>
+<br><br>
 
+```python
+"""
+Kochat을 이용하면
+약 20줄의 코드로 챗봇을 빌드할 수 있습니다!
+"""
+
+dataset = Dataset(ood=True)
+emb = GensimEmbedder(model=embed.FastText())
+
+clf = DistanceClassifier(
+    model=intent.CNN(dataset.intent_dict),
+    loss=CenterLoss(dataset.intent_dict)
+)
+
+rcn = EntityRecognizer(
+    model=entity.LSTM(dataset.entity_dict),
+    loss=CRFLoss(dataset.entity_dict)
+)
+
+kochat = KochatApi(
+    dataset=dataset,
+    embed_processor=emb,
+    intent_classifier=clf,
+    entity_recognizer=rcn,
+    scenarios=[weather, dust, travel, restaurant]
+)
+
+kochat.fit_all()
+kochat.run(port=8081)
+```
+<br><br><br>
 
 ## Table of contents
 
@@ -152,7 +183,7 @@ Slot Filling 방식은 미리 기능을 수행할 정보를 담는 '슬롯'을 �
 #### 2.2.2.2. 폴백 검출하기 : 모르겠으면 모른다고 말하기
 그러나 여기에 신경써야할 부분이 한 부분 존재합니다. 
 일반적인 딥러닝 분류모델은 모델이 학습한 클래스 내에서만 분류가 가능합니다.
-그러나 사용자가 네 가지의 발화의도 안에서만 말할 것이라는 보장은 없습니다.
+그러나 사용자가 4가지의 발화의도 안에서만 말할 것이라는 보장은 없습니다.
 만약 위처럼 "날씨 정보제공", "미세먼지 정보제공", "맛집 정보제공", "여행지 정보제공"의 데이터만
 학습한 인텐트 분류모델에 "안녕 반갑다."라는 말을 하게 되면 어떻게 될까요? 위 4가지에 속하지 않은
 발화 의도인 "인사"에 해당하지만 모델은 인삿말은 한번도 본적이 없기 때문에 이것도 역시 
@@ -454,8 +485,7 @@ question,label
 
 OOD 데이터는 물론 많으면 좋겠지만 만드는 것 자체가 부담이기 때문에 적은 수만 넣어도 됩니다.
 예시 데이터의 경우는 총 3000라인의 데이터 중 600라인정도의 OOD 데이터를 삽입하였습니다.
-추후 버전에서는 가벼운 N-gram 기법(마르코프 체인 등)을 이용하여 OOD 데이터 생성을 자동화
-할 계획입니다. 데이터까지 모두 삽입하셨다면 kochat을 이용할 준비가 끝났습니다. 아래 챕터에서는 
+데이터까지 모두 삽입하셨다면 kochat을 이용할 준비가 끝났습니다. 아래 챕터에서는 
 자세한 사용법에 대해 알려드리겠습니다.
 <br><br><br>
 
@@ -798,8 +828,7 @@ user_input = emb.predict("서울 홍대 맛집 알려줘")
 가질 것이라고 생각되지만 실제로는 그렇지 않습니다. 
 사실 `SoftmaxClassifier`를 실제 챗봇의 Intent Classification 기능을 위해
 사용하는 것은 적절하지 못합니다. `SoftmaxClassifier`는 아래 후술할 `DistanceClassifier`
-와의 성능 비교를 위해, 또 아래에 후술할 Kochat NLU 기능 중 한 가지로 제공하기 위해 구현하였습니다.
-사용법은 아래와 같습니다.
+와의 성능 비교를 위해 구현하였습니다. 사용법은 아래와 같습니다.
 
 ```python
 from kochat.data import Dataset
@@ -824,29 +853,34 @@ clf = SoftmaxClassifier(
 # 모델 학습
 clf.fit(dataset.load_intent(emb))
 
-# 모델 추론 (임베딩)
+# 모델 추론 (인텐트 분류)
 clf.predict(dataset.load_predict("오늘 서울 날씨 어떨까", emb))
 ```
 
 <br>
 
-#### 4.3.2. `from kochat.proc import DistanceClassifier`
+#### 4.3.3. `from kochat.proc import DistanceClassifier`
 `DistanceClassifier`는 `SoftmaxClassifier`와는 다르게 거리기반으로 작동하며,
-일종의 Memory Network입니다. [batch_size, -1] 의 사이즈로 출력된 출력벡터와 기존 데이터셋에 있는 벡터들 사이의
-거리를 계산하여 데이터셋에서 가장 가까운 K개의 샘플을 찾고 최다 샘플 클래스로 분류하는 
-최근접 이웃 Retrieval 기반의 분류 모델입니다.
+일종의 Memory Network입니다. [batch_size, -1] 의 사이즈로 출력된 출력벡터와 
+기존 데이터셋에 있는 문장 벡터들 사이의 거리를 계산하여 데이터셋에서 가장 가까운 
+K개의 샘플을 찾고 최다 샘플 클래스로 분류하는 최근접 이웃 Retrieval 기반의 분류 모델입니다.
 <br><br>
 
-이 때 각 클래스들 사이의 거리가 멀어야 분류하는데 좋기 때문에 사용자가 설정한 
-Loss함수(주로 Margin 기반 Loss)를 적용해 Metric Learning을 수행해서 클래스 간의 
-Margin을 최대치로 벌리는 메커니즘이 구현되어있습니다.
-또한 최근접 이웃 알고리즘의 K값은 config에서 직접 지정 할 수도 있고 
-GridSearch를 적용하여 자동으로 최적의 K값을 찾을 수 있게 설계하였습니다. 
-최근접 샘플을 찾을 때 Brute force하게 직접 거리를 일일이 다 구하면 굉장히 느리기 
+이 때 각 클래스들 사이의 거리가 멀고, 같은 클래스끼리는 가까이 있어야
+분류하는데 좋기 때문에 사용자가 설정한 Loss함수(주로 Margin 기반 Loss)를 
+적용해 Metric Learning을 수행해서 클래스 간의 Margin을 최대치로 벌리는 
+메커니즘이 구현되어있습니다. 또한 최근접 이웃 알고리즘의 K값은 config에서 
+직접 지정 할 수도 있고 GridSearch를 적용하여 자동으로 최적의 K값을 찾을 수 있게 설계하였습니다. 
+
+<br>
+
+최근접 이웃을 찾을 때 Brute force로 직접 거리를 일일이 다 구하면 굉장히 느리기 
 때문에 다차원 검색트리인 `KDTree` 혹은 `BallTree` (KDTree의 개선 형태)를 통해서 
-거리를 계산하며 결과로 만들어진 트리 구조를 메모리에 저장합니다. 
-트리기반의 검색 알고리즘을 사용하기 때문에 `SoftmaxClassifier`와 
-거의 비슷한 속도로 학습 및 추론이 가능합니다. 사용법은 아래와 같습니다.
+거리를 계산하며 결과로 만들어진 트리 구조를 메모리에 저장합니다. 검색트리의 종류, 
+거리 메트릭(유클리디언, 맨하튼 등..)은 전부 GridSearch로 자동화 시킬 수 있으며
+이에 대한 설정은 config에서 가능합니다. 트리기반의 검색 알고리즘을 사용하기 때문에 
+`SoftmaxClassifier`와 거의 비슷한 속도로 학습 및 추론이 가능합니다. 
+사용법은 아래와 같습니다.
 
 
 ```python
@@ -865,19 +899,19 @@ clf = DistanceClassifier(
 )
 
 # 되도록이면 DistanceClassifier는 Margin 기반의 Loss 함수를 이용해주세요
-# 현재는 CenterLoss, COCOLoss, Cosface, GausianMixture 등의 Metric Learning용 
-# Loss함수를 지원합니다. Loss 함수별 성능 비교 및 피쳐분포는 아래에 첨부할 예정입니다.
+# 현재는 CenterLoss, COCOLoss, Cosface, GausianMixture 등의 
+# 거리기반 Metric Learning 전용 Loss함수를 지원합니다.
 
 
 # 모델 학습
 clf.fit(dataset.load_intent(emb))
 
-# 모델 추론 (임베딩)
+# 모델 추론 (인텐트 분류)
 clf.predict(dataset.load_predict("오늘 서울 날씨 어떨까", emb))
 ```
 <br><br>
 
-#### 4.3.3. `FallbackDetector (Classifier에 내장됨)`
+#### 4.3.4. `FallbackDetector`
 `SoftmaxClassifier`와 `DistanceClassifier` 모두 Fallback Detection 기능을 구현되어있습니다.
 Fallback Detection 기능을 이용하는 방법은 아래와 같이 두 가지 방법을 제공합니다.
 
@@ -916,10 +950,11 @@ INTENT = {
 
     # 폴백 디텍터 후보 (선형 모델을 추천합니다)
     'fallback_detectors': [
-        LogisticRegression(max_iter=10000),
-        LinearSVC(max_iter=10000)
+        LogisticRegression(max_iter=30000),
+        LinearSVC(max_iter=30000)
 
         # 가능한 max_iter를 높게 설정해주세요
+        # sklearn default가 max_iter=100이라서 수렴이 안됩니다...
     ]
 }
 ```
@@ -931,14 +966,14 @@ Fallback Detection 문제는 Fallback 메트릭(거리 or score)가 일정 임�
 선형 SVM, 로지스틱 회귀 등을 주로 이용합니다. 물론 위의 리스트에 
 `RandomForestClassifier()`나 `BernoulliNB()`, `GradientBoostingClassifier()` 등
 다양한 sklearn 모델을 입력해도 동작은 하지만, 일반적으로 선형모델이 가장 우수하고 
-안정적인 성능을 보였습니다. (이에 대한 실험결과는 아래에 첨부할 예정입니다.)
+안정적인 성능을 보였습니다.
 
 <br>
 
 이렇게 Fallback의 메트릭으로 머신러닝 모델을 학습하면 Threshold를 직접 유저가 
 설정하지 않아도 됩니다. OOD 데이터셋이 필요하다는 치명적인 단점이 있지만, 
 차후 버전에서는 BERT와 Markov Chain을 이용해 OOD 데이터셋을 자동으로 빠르게 생성하는 
-모델을 구현하여 추가할 예정입니다. (업데이트 이후부터는 OOD 데이터셋이 필요 없어집니다.)
+모델을 구현하여 추가할 예정입니다. (이 업데이트 이후부터는 OOD 데이터셋이 필요 없어집니다.)
 
 <br>
 
@@ -971,9 +1006,8 @@ while True:
 ```
 <br>
 
-이렇게 얻어진 threshold와 원하는 criteria를 config에 설정하면 ood 데이터셋 없이도
-FallbackDetector를 이용할 수 있습니다. 그러나 지금 버전에서는 가급적 OOD 데이터셋을 이용해주세요. 
-(정 없으시면 예제 데이터라도...)
+이렇게 calibrate 모드를 여러번 진행하셔서 스스로 계산한 threshold와 원하는 criteria를 아래처럼 
+config에 설정하면 ood 데이터셋 없이도 FallbackDetector를 이용할 수 있습니다. 
 
 ```python
 INTENT = {
@@ -988,8 +1022,58 @@ INTENT = {
     # other 선택시 fallback이 되지 않는 최소 값
 }
 ```
-<br><br>
+<br>
 
+그러나 지금 버전에서는 가급적 OOD 데이터셋을 추가해서 이용해주세요. 
+정 없으시면 제가 데모 폴더에 넣어놓은 데이터라도 넣어서 자동화해서 쓰는게 
+성능 훨씬 좋습니다. 몇몇 빌더들은 이 임계치를 직접 정하게 하거나 그냥 고정값으로 
+fix해놓는데, 개인적으로 이걸 그냥 상수로 fix 해놓거나 유저보고 직접 정하게 하는건 
+챗봇 빌더로서, 혹은 프레임워크로서 너무 무책임한 것 아닌가 싶습니다. 
+(심지어 그런 빌더들은 metric이 뭔지도 모르는데 유저가 그걸 어떻게 정하라는건지..)
+<br><br><br>
+
+#### 4.3.5. `from kochat.proc import EntityRecongnizer`
+`EntityRecongnizer`는 엔티티 검출을 담당하는 Entity 모델들을 학습/테스트 시키고 추론하는 
+클래스입니다. Entity 검사의 경우 문장 1개당 라벨이 여러개(단어 갯수와 동일)입니다.
+문제는 Outside 토큰인 'O'가 대부분이기 때문에 전부다 'O'라고만 예측해도 거의 90% 육박하는
+정확도가 나오게 됩니다. 또한, 패드시퀀싱한 부분도 'O'로 처리 되어있는데, 이 부분도 맞은것으로
+생각하고 Loss를 계산합니다. 
+
+<br>
+
+이러한 문제를 해결하기 위해 Kochat은 F1 Score, Recall, Precision 등 
+NER의 성능을 보다 정확하게 평가 할 수 있는 강력한 Validation 및 시각화 지원과 
+Loss 함수 계산시 PAD부분에 masking을 적용할 수 있습니다. 
+(mask 적용 여부 역시 config에서 설정 가능합니다.)
+사용법은 아래와 같습니다.
+
+
+```python
+from kochat.data import Dataset
+from kochat.proc import EntityRecognizer
+from kochat.model import entity
+from kochat.loss import CRFLoss
+
+
+dataset = Dataset(ood=True)
+
+# 프로세서 생성
+rcn = EntityRecognizer(
+    model=entity.LSTM(dataset.intent_dict),
+    loss=CRFLoss(dataset.intent_dict)
+    # Conditional Random Field를 Loss함수로 지원합니다.
+)
+
+
+# 모델 학습
+rcn.fit(dataset.load_entity(emb))
+
+# 모델 추론 (엔티티 검출)
+rcn.predict(dataset.load_predict("오늘 서울 날씨 어떨까", emb))
+```
+
+
+<br><br>
 
 ### 4.4. `from kochat.loss`
 `loss` 패키지는 사전 정의된 다양한 built-in Loss 함수들이 저장된 패키지입니다.
@@ -1062,7 +1146,6 @@ Pytorch로 작성한 커스텀 모델을 직접 학습시키기고 챗봇 애플
 
 1. forward 함수에서 해당 loss를 계산합니다.
 2. compute_loss 함수에서 라벨과 비교하여 최종 loss값을 계산합니다.
-이 때 위에서 구현한 forward 함수를 활용합니다.
 <br><br>
 
 아래의 구현 예제를 보면 더욱 쉽게 이해할 수 있습니다.
@@ -1097,7 +1180,9 @@ class CosFace(BaseLoss):
     def compute_loss(self, label: Tensor, logits: Tensor, feats: Tensor, mask: nn.Module = None) -> Tensor:
         # 2. compute loss에서 최종 loss값을 계산합니다.
 
-        mlogits = self(feats, label) # forward 호출
+        mlogits = self(feats, label)
+        # 자기 자신의 forward 호출
+        
         return F.cross_entropy(mlogits, label)
 ```
 ```python
@@ -1125,14 +1210,17 @@ class CenterLoss(BaseLoss):
         # 2. compute loss에서 최종 loss값을 계산합니다.
 
         nll_loss = F.cross_entropy(logits, label)
-        center_loss = self(feats, label)  # forward 호출 
+        center_loss = self(feats, label)
+        # 자기 자신의 forward 호출
+
         return nll_loss + self.center_factor * center_loss
 ```
 <br><br><br>
 
 ### 4.5. `from kochat.app`
-`app` 패키지는 kochat 모델을 애플리케이션으로 배포할 수 있게끔 해주는 RESTful API은 `KochatApi`
-클래스와 API 호출에 관련된 시나리오를 작성할 수 있게끔 하는 `Scenario`클래스를 제공합니다.
+`app` 패키지는 kochat 모델을 애플리케이션으로 배포할 수 있게끔 해주는 
+RESTful API인 `KochatApi`클래스와 API 호출에 관련된 시나리오를 
+작성할 수 있게끔 하는 `Scenario`클래스를 제공합니다.
 
 <br>
 
@@ -1154,7 +1242,7 @@ from kocrawl.weather import WeatherCrawler
 
 # kocrawl은 kochat을 만들면서 함께 개발한 크롤러입니다.
 # (https://github.com/gusdnd852/kocrawl)
-# pip install kocrawl로 손쉽게 설치할 수 있습니다.
+# 'pip install kocrawl'로 손쉽게 설치할 수 있습니다.
 
 
 weather_scenario = Scenario(
@@ -1168,7 +1256,7 @@ weather_scenario = Scenario(
         'DATE': ['오늘']        
         # entity가 검출되지 않았을 때 default 값을 지정하고 싶으면 리스트 안에 원하는 값을 넣습니다.
         # [전주, 날씨, 알려줘] => [S-LOCATION, O, O] => api('오늘', S-LOCATION) call
-        # 만약 ['오늘', '현재']처럼 2개 이상 넣으면 랜덤으로 선택해서 default 값으로 지정합니다.
+        # 만약 ['오늘', '현재']처럼 2개 이상의 default를 넣으면 랜덤으로 선택해서 default 값으로 지정합니다.
     }
 
     # 시나리오 딕셔너리를 정의합니다.
@@ -1209,13 +1297,11 @@ reservation_scenario = Scenario(
 
 ## 5. Visualization Support
 
-## 6. Demo Application
+## 6. Performance Issue
 
-## 7. Performance Issue
+## 7. Contributor
 
-## 8. Contributor
-
-## 9. TODO List
+## 8. TODO List
 - [x] ver 1.0 : 엔티티 학습에 CRF 및 로스 마스킹 추가하기 
 - [x] ver 1.0 : 상세한 README 문서 작성 및 PyPI 배포하기
 - [x] ver 1.0 : 간단한 웹 인터페이스 기반 데모 애플리케이션 제작하기
@@ -1229,7 +1315,9 @@ reservation_scenario = Scenario(
 - [ ] ver 1.7 : 대화 흐름관리를 위한 Story 관리 기능 구현해서 추가하기
 <br><br><br>
 
-## 9. License
+## 9. Reference
+
+## 10. License
 ```
 Copyright 2020 Kochat.
 

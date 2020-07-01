@@ -162,3 +162,12 @@ class KochatApi:
 
         self.embed_processor.fit(self.dataset.load_embed())
         return self.embed_processor
+
+    def fit_all(self):
+        """
+        모든 모델을 처음부터 학습합니다.
+        """
+
+        self.fit_embed()
+        self.fit_intent()
+        self.fit_entity()
