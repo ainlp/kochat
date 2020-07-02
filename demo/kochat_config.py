@@ -106,7 +106,7 @@ ENTITY = {
     'weight_decay': 1e-4,  # 엔티티 학습시 사용되는 가중치 감쇠 정도
     'epochs': 1000,  # 엔티티 학습 횟수
     'd_model': 512,  # 엔티티 모델의 차원
-    'layers': 1,  # 엔티티 모델의 히든 레이어(층)의 수
+    'layers': 3,  # 엔티티 모델의 히든 레이어(층)의 수
     'masking': True,  # loss 계산시 패딩 마스크 여부
 
     'lr_scheduler_factor': 0.75,  # 러닝레이트 스케줄러 감소율

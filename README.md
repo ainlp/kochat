@@ -62,9 +62,7 @@ if __name__ == '__main__':
 
 ![](https://user-images.githubusercontent.com/38183241/86397184-513dfd00-bcde-11ea-9540-aa56a24b6d9b.png)
 
-![](https://user-images.githubusercontent.com/38183241/86322537-2324d280-bc76-11ea-962b-80d23e701691.png)
-
-![](https://user-images.githubusercontent.com/38183241/86322534-228c3c00-bc76-11ea-923e-1a0d9b3ad107.png)
+![](https://user-images.githubusercontent.com/38183241/86397411-b8f44800-bcde-11ea-8b66-22423c12584c.png)
 
 ![](https://user-images.githubusercontent.com/38183241/86396855-b47b5f80-bcdd-11ea-9672-4adf0f0ed140.png)
 
