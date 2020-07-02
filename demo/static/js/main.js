@@ -1,5 +1,6 @@
 // variables
 let userName = null;
+let state = 'SUCCESS';
 
 // functions
 function Message(arg) {
@@ -55,9 +56,7 @@ function onClickAsEnter(e) {
     }
 }
 
-function setUserName() {
-    let username = getMessageText();
-    sendMessage(username, 'right');
+function setUserName(username) {
 
     if (username != null && username.replace(" ", "" !== "")) {
         setTimeout(function () {
@@ -81,29 +80,57 @@ function setUserName() {
     }
 }
 
-function requestAnswer(messageText) {
+function requestChat(messageText, url_pattern) {
     $.ajax({
-        url: "http://119.206.99.242:9999/request/" + userName + '/' + messageText,
+        url: "http://your_server_address:8080/" + url_pattern + '/' + userName + '/' + messageText,
         type: "GET",
-        cache: false,
         dataType: "json",
         success: function (data) {
-            console.log(data);
+            state = data['state'];
+
+            if (state === 'SUCCESS') {
+                return sendMessage(data['answer'], 'left');
+            } else if (state === 'REQUIRE_LOCATION') {
+                return sendMessage('어느 지역을 알려드릴까요?', 'left');
+            } else {
+                return sendMessage('죄송합니다. 무슨말인지 잘 모르겠어요.', 'left');
+            }
         },
 
         error: function (request, status, error) {
-            let msg = "ERROR : " + request.status + "<br>";
-            msg += +"내용 : " + request.responseText + "<br>" + error;
-            console.log(msg);
+            console.log(error);
+
+            return sendMessage('죄송합니다. 서버 연결에 실패했습니다.', 'left');
         }
     });
 }
 
 function onSendButtonClicked() {
+    let messageText = getMessageText();
+    sendMessage(messageText, 'right');
+
     if (userName == null) {
-        userName = setUserName();
+        userName = setUserName(messageText);
+
     } else {
-        let messageText = getMessageText();
-        requestAnswer(messageText);
+        if (messageText.includes('안녕')) {
+            setTimeout(function () {
+                return sendMessage("안녕하세요. 저는 Kochat 여행봇입니다.", 'left');
+            }, 1000);
+        } else if (messageText.includes('고마워')) {
+            setTimeout(function () {
+                return sendMessage("천만에요. 더 물어보실 건 없나요?", 'left');
+            }, 1000);
+        } else if (messageText.includes('없어')) {
+            setTimeout(function () {
+                return sendMessage("그렇군요. 알겠습니다!", 'left');
+            }, 1000);
+
+
+        } else if (state.includes('REQUIRE')) {
+            return requestChat(messageText, 'fill_slot');
+        } else {
+            return requestChat(messageText, 'request_chat');
+        }
     }
 }

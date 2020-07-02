@@ -21,7 +21,7 @@ weather = Scenario(
 
 dust = Scenario(
     intent='dust',
-    api=DustCrawler().request,
+    api=DustCrawler().request_debug,
     scenario={
         'LOCATION': [],
         'DATE': ['오늘']
@@ -33,15 +33,15 @@ restaurant = Scenario(
     api=RestaurantCrawler().request,
     scenario={
         'LOCATION': [],
-        'RESTAURANT': ['맛집']
+        'RESTAURANT': ['유명한']
     }
 )
 
 travel = Scenario(
     intent='travel',
-    api=MapCrawler().request,
+    api=MapCrawler().request_debug,
     scenario={
         'LOCATION': [],
-        'PLACE': ['여행지']
+        'PLACE': ['관광지']
     }
 )

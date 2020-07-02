@@ -5,6 +5,7 @@ from flask import Flask
 from kochat.app.scenario import Scenario
 from kochat.app.scenario_manager import ScenarioManager
 from kochat.data.dataset import Dataset
+from kochat.decorators import api
 
 
 @api
@@ -104,8 +105,7 @@ class KochatApi:
 
             text = text + self.dialogue_cache[uid]['input']  # 이전에 저장된 dict 앞에 추가
             entity = entity + self.dialogue_cache[uid]['entity']  # 이전에 저장된 dict 앞에 추가
-            self.dialogue_cache[uid] = self.scenario_manager.apply_scenario(intent, entity, text)
-            return self.dialogue_cache[uid]
+            return self.scenario_manager.apply_scenario(intent, entity, text)
 
         @self.app.route('/{}/<text>'.format(self.get_intent_url_pattern), methods=['GET'])
         def get_intent(text: str) -> dict:
@@ -126,7 +126,7 @@ class KochatApi:
                 'answer': None
             }
 
-        @self.app.route('/{}}/<text>'.format(self.get_entity_url_pattern), methods=['GET'])
+        @self.app.route('/{}/<text>'.format(self.get_entity_url_pattern), methods=['GET'])
         def get_entity(text: str) -> dict:
             """
             Entity Recognition을 수행합니다.

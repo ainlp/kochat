@@ -26,9 +26,9 @@ rcn = EntityRecognizer(
 
 kochat = KochatApi(
     dataset=dataset,
-    embed_processor=(emb, True),
-    intent_classifier=(clf, True),
-    entity_recognizer=(rcn, True),
+    embed_processor=(emb, False),
+    intent_classifier=(clf, False),
+    entity_recognizer=(rcn, False),
     scenarios=[
         weather, dust, travel, restaurant
     ]
@@ -41,6 +41,6 @@ def index():
 
 
 if __name__ == '__main__':
-    kochat.app.template_folder = 'templates'
-    kochat.app.static_folder = 'static'
+    kochat.app.template_folder = kochat.root_dir + 'templates'
+    kochat.app.static_folder = kochat.root_dir + 'static'
     kochat.app.run(port=8080, host='0.0.0.0')
