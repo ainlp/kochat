@@ -22,11 +22,7 @@
     <list default="true" id="d122a472-58ee-4a2b-8505-15e95560cd02" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo/application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/kochat_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo/kochat_config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/scenrios.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo/scenrios.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/demo/static/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kochat/app/kochat_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/kochat/app/kochat_api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +85,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/demo/web/run_frontend.py" />
+    <property name="last_opened_file_path" value="$USER_HOME$/kochat-crawler" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -300,7 +296,7 @@
       <workItem from="1593291711820" duration="60148000" />
       <workItem from="1593526775645" duration="21103000" />
       <workItem from="1593575844018" duration="95840000" />
-      <workItem from="1593725022202" duration="912000" />
+      <workItem from="1593725022202" duration="1487000" />
     </task>
     <servers />
   </component>
@@ -397,11 +393,11 @@
       <screen x="0" y="39" width="1920" height="1041" />
     </state>
     <state x="796" y="308" key="EnvironmentVariablesDialog/0.39.1920.1041@0.39.1920.1041" timestamp="1592887341483" />
-    <state x="755" y="322" key="FileChooserDialogImpl" timestamp="1593694350681">
+    <state x="755" y="322" key="FileChooserDialogImpl" timestamp="1593726499845">
       <screen x="0" y="39" width="1920" height="1041" />
     </state>
     <state x="755" y="294" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1591103888965" />
-    <state x="755" y="322" key="FileChooserDialogImpl/0.39.1920.1041@0.39.1920.1041" timestamp="1593694350681" />
+    <state x="755" y="322" key="FileChooserDialogImpl/0.39.1920.1041@0.39.1920.1041" timestamp="1593726499845" />
     <state width="1059" height="232" key="GridCell.Tab.0.bottom" timestamp="1593721465819">
       <screen x="0" y="39" width="1920" height="1041" />
     </state>

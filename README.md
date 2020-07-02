@@ -2033,9 +2033,7 @@ function onSendButtonClicked() {
 실제로 모든 도시나 모든 음식 등을 알아 들을 정도로 
 대화를 나누려면 데모 데이터셋보다 많은
 데이터를 삽입하셔야 더욱 좋은 성능을 기대할 수 있을 것입니다.
-<br><br>
-
-모든 데모애플리케이션 소스코드는 [여기](https://github.com/gusdnd852/kochat/tree/master/demo)
+모든 데모 애플리케이션 소스코드는 [여기](https://github.com/gusdnd852/kochat/tree/master/demo)
 를 참고해주세요
 
 <br><br><br>
@@ -2065,6 +2063,8 @@ function onSendButtonClicked() {
 - [챗봇 분류 그림](https://towardsdatascience.com/chatbots-are-cool-a-framework-using-python-part-1-overview-7c69af7a7439)
 - [seq2seq 그림](https://mc.ai/implement-of-seq2seq-model/)
 - [Fallback Detection 그림](https://docs.smartly.ai/docs/intent-detection)
+- []
+
 <br><br><br>
 
 ## 12. License
