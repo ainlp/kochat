@@ -70,7 +70,6 @@ if __name__ == '__main__':
 ![](https://user-images.githubusercontent.com/38183241/86396855-b47b5f80-bcdd-11ea-9672-4adf0f0ed140.png)
 
 ![](https://user-images.githubusercontent.com/38183241/86323429-c62a1c00-bc77-11ea-9caf-ede65f4cbc6c.png)
-
 <br><br><br>
 
 ## Table of contents
@@ -85,7 +84,7 @@ if __name__ == '__main__':
             - [2.2.2.1. 인텐트(의도) 분류하기 : 슬롯 고르기](https://github.com/gusdnd852/kochat#2221-%EC%9D%B8%ED%85%90%ED%8A%B8%EC%9D%98%EB%8F%84-%EB%B6%84%EB%A5%98%ED%95%98%EA%B8%B0--%EC%8A%AC%EB%A1%AF-%EA%B3%A0%EB%A5%B4%EA%B8%B0)
             - [2.2.2.2. 폴백 검출하기 : 모르겠으면 모른다고 말하기](https://github.com/gusdnd852/kochat#2222-%ED%8F%B4%EB%B0%B1-%EA%B2%80%EC%B6%9C%ED%95%98%EA%B8%B0--%EB%AA%A8%EB%A5%B4%EA%B2%A0%EC%9C%BC%EB%A9%B4-%EB%AA%A8%EB%A5%B8%EB%8B%A4%EA%B3%A0-%EB%A7%90%ED%95%98%EA%B8%B0)
             - [2.2.2.3. 엔티티(개체명) 인식하기 : 슬롯 채우기](https://github.com/gusdnd852/kochat#2223-%EC%97%94%ED%8B%B0%ED%8B%B0%EA%B0%9C%EC%B2%B4%EB%AA%85-%EC%9D%B8%EC%8B%9D%ED%95%98%EA%B8%B0--%EC%8A%AC%EB%A1%AF-%EC%B1%84%EC%9A%B0%EA%B8%B0)
-            - [2.2.2.4. API 호출하기 : 대답 생성하기](https://github.com/gusdnd852/kochat#2224-%EB%8C%80%EB%8B%B5-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0)
+            - [2.2.2.4. API 호출하기 : 대답 생성하기](https://github.com/gusdnd852/kochat#2224-api-%ED%98%B8%EC%B6%9C%ED%95%98%EA%B8%B0--%EB%8C%80%EB%8B%B5-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0)
 - [3. Getting Started](https://github.com/gusdnd852/kochat#3-getting-started)
     - [3.1. Requirements](https://github.com/gusdnd852/kochat#31-requirements)
     - [3.2. pip install](https://github.com/gusdnd852/kochat#32-pip-install)
@@ -134,7 +133,21 @@ if __name__ == '__main__':
     - [5.6. Train/Test Classification Performance Report](https://github.com/gusdnd852/kochat#56-traintest-classification-performance-report)
     - [5.7. Train/Test Fallback Detection Performance Report](https://github.com/gusdnd852/kochat#57-traintest-fallback-detection-performance-report)
     - [5.8. Feature Space Visualization](https://github.com/gusdnd852/kochat#58-feature-space-visualization)
-        
+- [6. Performance Issue](https://github.com/gusdnd852/kochat#6-performance-issue)
+    - [6.1. 얼굴인식 영역에서 쓰이던 Loss 함수들은 Fallback 디텍션에 효과적이다.](https://github.com/gusdnd852/kochat#61-%EC%96%BC%EA%B5%B4%EC%9D%B8%EC%8B%9D-%EC%98%81%EC%97%AD%EC%97%90%EC%84%9C-%EC%93%B0%EC%9D%B4%EB%8D%98-loss-%ED%95%A8%EC%88%98%EB%93%A4%EC%9D%80-fallback-%EB%94%94%ED%85%8D%EC%85%98%EC%97%90-%ED%9A%A8%EA%B3%BC%EC%A0%81%EC%9D%B4%EB%8B%A4)
+    - [6.2. Retrieval Feature로는 LSTM보다 CNN이 더 좋다.](https://github.com/gusdnd852/kochat#62-retrieval-feature%EB%A1%9C%EB%8A%94-lstm%EB%B3%B4%EB%8B%A4-cnn%EC%9D%B4-%EB%8D%94-%EC%A2%8B%EB%8B%A4)
+    - [6.3. CRF Loss의 수렴 속도는 CrossEntropy보다 느리다.](https://github.com/gusdnd852/kochat#63-crf-loss%EC%9D%98-%EC%88%98%EB%A0%B4-%EC%86%8D%EB%8F%84%EB%8A%94-crossentropy%EB%B3%B4%EB%8B%A4-%EB%8A%90%EB%A6%AC%EB%8B%A4)
+    - [6.4. FallbackDetector의 max_iter는 높게 설정해야한다.](https://github.com/gusdnd852/kochat#64-fallbackdetector%EC%9D%98-max_iter%EB%8A%94-%EB%86%92%EA%B2%8C-%EC%84%A4%EC%A0%95%ED%95%B4%EC%95%BC%ED%95%9C%EB%8B%A4)
+- [7. Demo Application](https://github.com/gusdnd852/kochat#64-fallbackdetector%EC%9D%98-max_iter%EB%8A%94-%EB%86%92%EA%B2%8C-%EC%84%A4%EC%A0%95%ED%95%B4%EC%95%BC%ED%95%9C%EB%8B%A4)
+    - [7.1. View (HTML)](https://github.com/gusdnd852/kochat#71-view-html)
+    - [7.2. 딥러닝 모델 구성](https://github.com/gusdnd852/kochat#72-%EB%94%A5%EB%9F%AC%EB%8B%9D-%EB%AA%A8%EB%8D%B8-%EA%B5%AC%EC%84%B1)
+    - [7.3. 시나리오 구성](https://github.com/gusdnd852/kochat#73-%EC%8B%9C%EB%82%98%EB%A6%AC%EC%98%A4-%EA%B5%AC%EC%84%B1)
+    - [7.4. Javascript 구현 (+ Ajax)](https://github.com/gusdnd852/kochat#74-javascript-%EA%B5%AC%ED%98%84--ajax)
+    - [7.5. 실행 결과](https://github.com/gusdnd852/kochat#75-%EC%8B%A4%ED%96%89-%EA%B2%B0%EA%B3%BC)
+- [8. Contributor](https://github.com/gusdnd852/kochat#8-contributor)
+- [9. TODO List](https://github.com/gusdnd852/kochat#9-todo-list)
+- [10. Reference](https://github.com/gusdnd852/kochat#10-reference)
+- [11. License](https://github.com/gusdnd852/kochat#11-license)
 <br><br><br>
 
 
@@ -368,7 +381,7 @@ flask==1.1.2
 
 ### 3.4 Configuration 파일 추가하기
 pip를 이용해 Kochat을 다운로드 받았다면 프로젝트에, kochat의 configuration 파일을 추가해야합니다.
-[kochat_config.zip](https://github.com/gusdnd852/kochat/files/4853859/kochat_config.zip) 을 
+[kochat_config.zip](https://github.com/gusdnd852/kochat/files/4866878/kochat_config.zip) 을 
 다운로드 받고 압축을 풀어서 interpreter의 working directory에 넣습니다. (kochat api를 실행하는 파일과
 동일한 경로에 있어야합니다. 자세한 예시는 아래 데모에서 확인하실 수 있습니다.) 
 config 파일에는 다양한 설정 값들이 존재하니 확인하고 입맛대로 변경하시면 됩니다.
@@ -2097,7 +2110,6 @@ function onSendButtonClicked() {
 데이터를 삽입하셔야 더욱 좋은 성능을 기대할 수 있을 것입니다.
 모든 데모 애플리케이션 소스코드는 [여기](https://github.com/gusdnd852/kochat/tree/master/demo)
 를 참고해주세요
-
 <br><br><br>
 
 
@@ -2126,7 +2138,7 @@ function onSendButtonClicked() {
 - [seq2seq 그림](https://mc.ai/implement-of-seq2seq-model/)
 - [Fallback Detection 그림](https://docs.smartly.ai/docs/intent-detection)
 - [데모 애플리케이션 템플릿](https://bootsnipp.com/snippets/ZlkBn)
-
+- 그 외의 그림 및 소스코드 : 본인 제작
 <br><br><br>
 
 ## 11. License
