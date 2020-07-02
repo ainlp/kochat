@@ -67,8 +67,8 @@ INTENT = {
     'weight_decay': 1e-4,  # 인텐트 학습시 사용되는 가중치 감쇠 정도
     'epochs': 500,  # 인텐트 학습 횟수
     'd_model': 512,  # 인텐트 모델의 차원
-    'd_loss': 32,  # 인텐트 로스의 차원 (시각화차원, 높을수록 ood 디텍션이 정확해지지만 느려집니다.)
-    'layers': 1,  # 인텐트 모델의 히든 레이어(층)의 수
+    'd_loss': 64,  # 인텐트 로스의 차원 (시각화차원, 높을수록 ood 디텍션이 정확해지지만 느려집니다.)
+    'layers': 3,  # 인텐트 모델의 히든 레이어(층)의 수
     'grid_search': True,  # KNN과 Fallback Detector 학습시 그리드 서치 여부
 
     'lr_scheduler_factor': 0.75,  # 러닝레이트 스케줄러 감소율

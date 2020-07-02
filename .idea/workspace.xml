@@ -22,11 +22,7 @@
     <list default="true" id="d122a472-58ee-4a2b-8505-15e95560cd02" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo/application.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/kochat_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo/kochat_config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kochat/app/kochat_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/kochat/app/kochat_api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kochat/decorators.py" beforeDir="false" afterPath="$PROJECT_DIR$/kochat/decorators.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -361,7 +357,7 @@
       <workItem from="1593230152086" duration="47815000" />
       <workItem from="1593291711820" duration="60148000" />
       <workItem from="1593526775645" duration="21103000" />
-      <workItem from="1593575844018" duration="87296000" />
+      <workItem from="1593575844018" duration="88523000" />
     </task>
     <servers />
   </component>

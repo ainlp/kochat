@@ -58,11 +58,15 @@ if __name__ == '__main__':
 - 자신만의 커스텀 모델, Loss함수를 적용할 수 있습니다. NLP 전문가에겐 더욱 유용합니다.
 - 챗봇에 필요한 데이터 전처리, 모델, 학습 파이프라인, RESTful API까지 모든 부분을 제공합니다.
 - 가격 등을 신경쓸 필요 없으며, 앞으로도 쭉 오픈소스 프로젝트로 제공할 예정입니다.
-- 아래와 같은 다양한 성능 평가 메트릭과 강력한 시각화 기능을 제공합니다. (아래는 일부입니다.)
+- 아래와 같은 다양한 성능 평가 메트릭과 강력한 시각화 기능을 제공합니다.
+
+![](https://user-images.githubusercontent.com/38183241/86397184-513dfd00-bcde-11ea-9540-aa56a24b6d9b.png)
 
 ![](https://user-images.githubusercontent.com/38183241/86322537-2324d280-bc76-11ea-962b-80d23e701691.png)
 
 ![](https://user-images.githubusercontent.com/38183241/86322534-228c3c00-bc76-11ea-923e-1a0d9b3ad107.png)
+
+![](https://user-images.githubusercontent.com/38183241/86396855-b47b5f80-bcdd-11ea-9672-4adf0f0ed140.png)
 
 ![](https://user-images.githubusercontent.com/38183241/86323429-c62a1c00-bc77-11ea-9caf-ede65f4cbc6c.png)
 
