@@ -1267,7 +1267,7 @@ class CosFace(BaseLoss):
         self.centers = nn.Parameter(torch.randn(self.classes, self.d_loss))
 
     def forward(self, feat: Tensor, label: Tensor) -> Tensor:
-        # 1. forward 함수에서 전체 loss를 계산합니다.
+        # 1. forward 함수에서 현재 loss함수의 loss를 계산합니다.
 
         batch_size = feat.shape[0]
         norms = torch.norm(feat, p=2, dim=-1, keepdim=True)
@@ -1302,7 +1302,7 @@ class CenterLoss(BaseLoss):
         self.center_loss_function = CenterLossFunction.apply
 
     def forward(self, feat: Tensor, label: Tensor) -> Tensor:
-        # 1. forward 함수에서 전체 loss를 계산합니다.
+        # 1. forward 함수에서 현재 loss함수의 loss를 계산합니다.
 
         batch_size = feat.size(0)
         feat = feat.view(batch_size, 1, 1, -1).squeeze()

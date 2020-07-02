@@ -22,6 +22,8 @@
     <list default="true" id="d122a472-58ee-4a2b-8505-15e95560cd02" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/kochat_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo/kochat_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +86,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/kochat-crawler" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -295,7 +297,8 @@
       <workItem from="1593291711820" duration="60148000" />
       <workItem from="1593526775645" duration="21103000" />
       <workItem from="1593575844018" duration="95840000" />
-      <workItem from="1593725022202" duration="3455000" />
+      <workItem from="1593725022202" duration="4155000" />
+      <workItem from="1593733428592" duration="148000" />
     </task>
     <servers />
   </component>
@@ -349,11 +352,11 @@
     </state>
     <state x="811" y="437" key="#Volume_binding/0.0.1920.1080@0.0.1920.1080" timestamp="1591029040179" />
     <state x="811" y="460" key="#Volume_binding/0.39.1920.1041@0.39.1920.1041" timestamp="1593618383594" />
-    <state x="670" y="119" width="1123" height="691" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1593715925969">
+    <state x="670" y="119" width="1123" height="691" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1593733457048">
       <screen x="0" y="39" width="1920" height="1041" />
     </state>
     <state x="414" y="194" width="1123" height="691" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1591201352070" />
-    <state x="670" y="119" width="1123" height="691" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.39.1920.1041@0.39.1920.1041" timestamp="1593715925969" />
+    <state x="670" y="119" width="1123" height="691" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.39.1920.1041@0.39.1920.1041" timestamp="1593733457048" />
     <state x="108" y="365" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1593325709816">
       <screen x="0" y="39" width="1920" height="1041" />
     </state>
@@ -532,6 +535,7 @@
     <SUITE FILE_PATH="coverage/chatbot$train_backend_models.coverage" NAME="train_backend_models Coverage Results" MODIFIED="1592622150955" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Chatbot$visualization__1_.coverage" NAME="visualization (1) Coverage Results" MODIFIED="1589202747121" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/embedding" />
     <SUITE FILE_PATH="coverage/Chatbot$visualization.coverage" NAME="visualization Coverage Results" MODIFIED="1589201703604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/util" />
+    <SUITE FILE_PATH="coverage/kochat$application.coverage" NAME="application Coverage Results" MODIFIED="1593733763413" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/demo" />
     <SUITE FILE_PATH="coverage/Chatbot$restful_api.coverage" NAME="restful_api Coverage Results" MODIFIED="1591947898409" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/restful" />
     <SUITE FILE_PATH="coverage/Chatbot$convert.coverage" NAME="convert Coverage Results" MODIFIED="1592008432400" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data" />
     <SUITE FILE_PATH="coverage/chatbot$train_backend_models__1_.coverage" NAME="train_backend_models Coverage Results" MODIFIED="1592632931328" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
