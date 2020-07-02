@@ -3,7 +3,7 @@
 @since 6/28/2020
 @see https://github.com/gusdnd852
 """
-from kochat.app import Scenario
+from kochat.app.scenario import Scenario
 
 
 class ScenarioManager:
@@ -20,7 +20,7 @@ class ScenarioManager:
     def apply_scenario(self, intent, entity, text):
         for scenario in self.scenarios:
             if scenario.intent == intent:
-                scenario.apply(entity, text)
+                return scenario.apply(entity, text)
 
         return {
             'input': text,

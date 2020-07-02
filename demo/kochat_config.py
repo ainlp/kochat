@@ -5,13 +5,18 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.svm import LinearSVC
 
 root_dir = os.path.abspath(os.curdir)
+# 만약 로딩이 안된다면 root_dir을 직접 적어주세요.
+# 데모 기준에서 OS별 root path는 아래와 같이 적으면 됩니다.
+# windows : C:Users/yourname/yourdirectory/kochat/demo/server...
+# linux : /home/yourname/yourdirectory/kochat/demo/server...
+
 _ = '\\' if platform.system() == 'Windows' else '/'
 if root_dir[len(root_dir) - 1] != _: root_dir += _
 
 BASE = {
     'root_dir': root_dir.format(_=_),  # 백엔드 루트경로
     'device': 'cuda' if torch.cuda.is_available() else 'cpu',
-    'vector_size': 64,  # 단어 벡터 사이즈
+    'vector_size': 128,  # 단어 벡터 사이즈
     'batch_size': 512,  # 미니배치 사이즈
     'max_len': 8,  # 문장의 최대 길이 (패드 시퀀싱)
     'delimeter': _,  # OS에 따른 폴더 delimeter
@@ -27,7 +32,7 @@ DATA = {
     'intent_data_dir': BASE['root_dir'] + "data{_}intent_data.csv".format(_=_),  # 생성된 인텐트 데이터 파일 경로
     'entity_data_dir': BASE['root_dir'] + "data{_}entity_data.csv".format(_=_),  # 생성된 엔티티 데이터 파일 경로
 
-    'NER_categories': ['DATE', 'LOCATION', 'RESTAURANT', 'TRAVEL'],  # 사용자 정의 태그
+    'NER_categories': ['DATE', 'LOCATION', 'RESTAURANT', 'PLACE'],  # 사용자 정의 태그
     'NER_tagging': ['B', 'E', 'I', 'S'],  # NER의 BEGIN, END, INSIDE, SINGLE 태그
     'NER_outside': 'O',  # NER의 O태그 (Outside를 의미)
 }
@@ -35,7 +40,7 @@ DATA = {
 PROC = {
     'logging_precision': 5,  # 결과 저장시 반올림 소수점 n번째에서 반올림
     'model_dir': BASE['root_dir'] + "saved{_}".format(_=_),  # 모델 파일, 시각화 자료 저장 경로
-    'visualization_epoch': 1,  # 시각화 빈도 (애폭마다 시각화 수행)
+    'visualization_epoch': 50,  # 시각화 빈도 (애폭마다 시각화 수행)
     'save_epoch': 100  # 저장 빈도 (에폭마다 모델 저장)
 }
 
@@ -53,14 +58,14 @@ GENSIM = {
     'workers': 8,  # 학습시 사용되는 쓰레드 워커 갯수
     'min_count': 2,  # 데이터에서 min count보다 많이 등장해야 단어로 인지
     'sg': 1,  # 0 : CBOW = 1 \\ SkipGram = 2
-    'iter': 2000  # 임베딩 학습 횟수
+    'iter': 3000  # 임베딩 학습 횟수
 }
 
 INTENT = {
     'model_lr': 1e-4,  # 인텐트 학습시 사용되는 러닝레이트
     'loss_lr': 1e-2,  # 인텐트 학습시 사용되는 러닝레이트
     'weight_decay': 1e-4,  # 인텐트 학습시 사용되는 가중치 감쇠 정도
-    'epochs': 350,  # 인텐트 학습 횟수
+    'epochs': 500,  # 인텐트 학습 횟수
     'd_model': 512,  # 인텐트 모델의 차원
     'd_loss': 32,  # 인텐트 로스의 차원 (시각화차원, 높을수록 ood 디텍션이 정확해지지만 느려집니다.)
     'layers': 1,  # 인텐트 모델의 히든 레이어(층)의 수
@@ -99,7 +104,7 @@ ENTITY = {
     'model_lr': 1e-4,  # 엔티티 학습시 사용되는 모델 러닝레이트
     'loss_lr': 1e-4,  # 엔티티 학습시 사용되는 로스 러닝레이트 (아직 사용되지 않음)
     'weight_decay': 1e-4,  # 엔티티 학습시 사용되는 가중치 감쇠 정도
-    'epochs': 2000,  # 엔티티 학습 횟수
+    'epochs': 1000,  # 엔티티 학습 횟수
     'd_model': 512,  # 엔티티 모델의 차원
     'layers': 1,  # 엔티티 모델의 히든 레이어(층)의 수
     'masking': True,  # loss 계산시 패딩 마스크 여부

@@ -5,10 +5,16 @@
 ![01_introduction_kochat](https://user-images.githubusercontent.com/38183241/85958000-1b8ed080-b9cd-11ea-99d6-69b472f3e2ff.jpg)
 <br><br>
 
+## Table of contents
+
+<br><br><br>
+
+## 1. Demo
+
 ```python
 """
 Kochat을 이용하면 30줄도 안되는 코드로 
-딥러닝 챗봇을 빌드할 수 있습니다!
+딥러닝 챗봇서버를 빌드할 수 있습니다!
 """
 
 dataset = Dataset(ood=True)
@@ -37,11 +43,8 @@ kochat.run(port=8081)
 ```
 <br><br><br>
 
-## Table of contents
 
-<br><br><br>
-
-## 1. Kochat 이란?
+## 2. Kochat 이란?
 
 
 **Kochat은 한국어 전용 챗봇 개발 프레임워크**로, 머신러닝 개발자라면 
@@ -66,7 +69,7 @@ Kochat은 이러한 부분을 해결하기 위해 제작되었습니다.
 기능을 늘려나갈 계획입니다.
 <br><br>
 
-### 1.1. 기존 챗봇 빌더와의 차이점
+### 2.1. 기존 챗봇 빌더와의 차이점
 - 기존에 상용화된 많은 챗봇 빌더와 Kochat은 타깃으로 하는 사용자가 다릅니다.
 상용화된 챗봇 빌더들은 매우 간편한 웹 기반의 UX/UI를 제공하며 일반인을 타깃으로 합니다.
 그에 반해 **Kochat은 챗봇빌더 보다는 개발자를 타깃으로하는 프레임워크에 가깝습니다.**
@@ -83,7 +86,7 @@ Loss 함수를 바꾸거나 본인이 원하면 아예 새로운 기능을 첨�
 제공할 예정입니다.
 <br><br>
 
-### 1.2. Kochat 제작 동기
+### 2.2. Kochat 제작 동기
 
 ![01_introduction_rasa](https://user-images.githubusercontent.com/38183241/85958002-1c276700-b9cd-11ea-8201-48976d8cf91d.png)
 
@@ -111,14 +114,14 @@ Kochat은 앞으로도 계속 오픈소스 프로젝트로 유지될 것이며, 
 
 <br><br><br>
 
-## 2. About Chatbot 
+## 3. About Chatbot 
 이 챕터에서는 챗봇의 분류와 구현방법, Kochat은 어떻게 챗봇을 구현하고 있는지에 대해 
 간단하게 소개합니다. 
 <br><br>
 
-### 2.1. 챗봇의 분류
+### 3.1. 챗봇의 분류
 
-![02_chatbot_table](https://user-images.githubusercontent.com/38183241/85957998-1af63a00-b9cd-11ea-8ed3-e3527fe790a7.jpg)
+![chatbot_table](https://user-images.githubusercontent.com/38183241/85957998-1af63a00-b9cd-11ea-8ed3-e3527fe790a7.jpg)
 
 챗봇은 크게 비목적대화를 위한 Open domain 챗봇과 목적대화를 위한 Close domain 챗봇으로 나뉩니다.
 Open domain 챗봇은 주로 잡담 등을 수행하는 챗봇을 의미하는데, 
@@ -129,14 +132,14 @@ Close domain 챗봇이란 한정된 대화 범위 안에서 사용자가 원하�
 사용자와 잡담도 잘 해야하므로 Open domain 챗봇과 Close domain 챗봇이 모두 포함되어 있는 경우가 많습니다.
 <br><br>
 
-### 2.2. 챗봇의 구현
+### 3.2. 챗봇의 구현
 챗봇을 구현하는 방법은 크게 통계기반의 챗봇과 딥러닝 기반의 챗봇으로 나뉩니다.
 여기에서는 딥러닝 기반의 챗봇만 소개하도록 하겠습니다.
 <br><br>
  
-#### 2.2.1. Open domain 챗봇
+#### 3.2.1. Open domain 챗봇
 
-![02_chatbot_seq2seq](https://user-images.githubusercontent.com/38183241/85957996-19c50d00-b9cd-11ea-8a86-8d814e737f45.png)
+![chatbot_seq2seq](https://user-images.githubusercontent.com/38183241/85957996-19c50d00-b9cd-11ea-8a86-8d814e737f45.png)
 
 먼저 Open domain 챗봇의 경우는 딥러닝 분야에서는 대부분, End to End 
 신경망 기계번역 방식(Seq2Seq)으로 구현되어왔습니다. Seq2Seq은 한 문장을 다른 문장으로 
@@ -148,9 +151,9 @@ Close domain 챗봇이란 한정된 대화 범위 안에서 사용자가 원하�
 (그러나 현재버전 프레임워크에서는 Close domain 만 지원합니다. 차후 버전에서 다양한 Seq2Seq 모델도 추가할 예정입니다.)
 <br><br>
 
-#### 2.2.2. Close domain 챗봇
+#### 3.2.2. Close domain 챗봇
 
-![02_chatbot_slot_filling](https://user-images.githubusercontent.com/38183241/85957997-1a5da380-b9cd-11ea-9ead-9cb554efceaf.jpg)
+![chatbot_slot_filling](https://user-images.githubusercontent.com/38183241/85957997-1a5da380-b9cd-11ea-9ead-9cb554efceaf.jpg)
 
 Close domain 챗봇은 대부분 Slot Filling 방식으로 구현되어 왔습니다. 물론 Close domain 챗봇도
 Open domain처럼 End to end로 구현하려는 [다양한](https://arxiv.org/pdf/1605.07683.pdf) 
@@ -169,9 +172,9 @@ Slot Filling 방식은 미리 기능을 수행할 정보를 담는 '슬롯'을 �
 핵심 기능을 구현해야한다고 합시다. 
 <br><br>
 
-#### 2.2.2.1. 인텐트(의도) 분류하기 : 슬롯 고르기
+#### 3.2.2.1. 인텐트(의도) 분류하기 : 슬롯 고르기
 
-![02_chatbot_intent_classification](https://user-images.githubusercontent.com/38183241/85957993-1893e000-b9cd-11ea-858c-f0dd607f3825.jpg)
+![chatbot_intent_classification](https://user-images.githubusercontent.com/38183241/85957993-1893e000-b9cd-11ea-858c-f0dd607f3825.jpg)
 
 가장 먼저 사용자에게 문장을 입력받았을 때, 우리는 저 4가지 정보제공 기능 중
 어떤 기능을 실행해야하는지 알아채야합니다. 이 것을 인텐트(Intent)분류. 즉, 의도 분류라고 합니다.
@@ -180,7 +183,7 @@ Slot Filling 방식은 미리 기능을 수행할 정보를 담는 '슬롯'을 �
 어떤 API를 사용해야할지 알아냅니다.
 <br><br>
 
-#### 2.2.2.2. 폴백 검출하기 : 모르겠으면 모른다고 말하기
+#### 3.2.2.2. 폴백 검출하기 : 모르겠으면 모른다고 말하기
 그러나 여기에 신경써야할 부분이 한 부분 존재합니다. 
 일반적인 딥러닝 분류모델은 모델이 학습한 클래스 내에서만 분류가 가능합니다.
 그러나 사용자가 4가지의 발화의도 안에서만 말할 것이라는 보장은 없습니다.
@@ -203,12 +206,12 @@ Slot Filling 방식은 미리 기능을 수행할 정보를 담는 '슬롯'을 �
 
 Kochat은 이렇게 단순히 문장들의 벡터 Cosine 유사도를 비교하지 않고 
 더욱 고차원적인 방법을 사용하여 Fallback 디텍션을 보다 더 잘 수행하도록
-설계하였는데 이에 대한 자세한 내용은 "4. Usage"에서 언급하도록 하겠습니다.
+설계하였는데 이에 대한 자세한 내용은 "5. Usage"에서 언급하도록 하겠습니다.
 <br><br>
 
-#### 2.2.2.3. 엔티티(개체명) 인식하기 : 슬롯 채우기
+#### 3.2.2.3. 엔티티(개체명) 인식하기 : 슬롯 채우기
 
-![02_chatbot_entity_recognition](https://user-images.githubusercontent.com/38183241/85957992-17fb4980-b9cd-11ea-9a57-de36bc37a979.jpg)
+![chatbot_entity_recognition](https://user-images.githubusercontent.com/38183241/85957992-17fb4980-b9cd-11ea-9a57-de36bc37a979.jpg)
 
 그 다음 해야할 일은 바로 개체명인식 (Named Entity Recognition)입니다.
 어떤 API를 호출할지 알아냈다면, 이제 그 API를 호출하기 위한 파라미터를 찾아야합니다.
@@ -217,9 +220,9 @@ Kochat은 이렇게 단순히 문장들의 벡터 Cosine 유사도를 비교하�
 지역에 관련된 정보는 아직 찾아내지 못했기 때문에 다시 되물어서 찾아내야합니다. 
 <br><br>
 
-#### 2.2.2.4. 대답 생성하기
+#### 3.2.2.4. 대답 생성하기
 
-![02_chatbot_response_generation](https://user-images.githubusercontent.com/38183241/85957995-19c50d00-b9cd-11ea-8f88-50fea23df8d5.jpg)
+![chatbot_response_generation](https://user-images.githubusercontent.com/38183241/85957995-19c50d00-b9cd-11ea-8f88-50fea23df8d5.jpg)
 
 슬롯이 모두 채워졌다면 API를 실행시켜서 외부로부터 정보를 제공받습니다.
 API로부터 결과가 도착하면, 미리 만들어둔 템플릿 문장에 해당 실행 결과를 삽입하여 대답을 만들어내고,
@@ -235,16 +238,16 @@ Kochat은 이 세가지 모듈과 이를 서빙할 Restful API까지 모두 포�
 
 <br><br><br>
 
-## 3. Getting Started
+## 4. Getting Started
 
-### 3.1. Requirements 
+### 4.1. Requirements 
 Kochat을 이용하려면 반드시 본인의 OS와 머신에 맞는 Pytorch가 설치 되어있어야합니다.
 만약 Pytorch를 설치하지 않으셨다면 [여기](https://pytorch.org/get-started/locally/) 에서 다운로드 받아주세요.
 (Kochat을 설치한다고 해서 Pytorch가 함께 설치되지 않습니다. 본인 버전에 맞는 Pytorch를 다운로드 받아주세요)
 
 <br>
 
-### 3.2. pip install 
+### 4.2. pip install 
 pip를 이용해 Kochat을 간단하게 다운로드하고 사용할 수 있습니다. 
 아래 명령어를 통해서 kochat을 다운로드 받아주세요.
 ```shell script
@@ -253,7 +256,7 @@ pip install kochat
 
 <br>
 
-### 3.3 Dependencies
+### 4.3 Dependencies
 패키지를 구현하는데 사용된 디펜던시는 아래와 같습니다. 
 (Kochat 설치시 함께 설치됩니다.)
 ```
@@ -271,7 +274,7 @@ flask==1.1.2
 
 <br>
 
-### 3.4 Configuration 파일 추가하기
+### 4.4 Configuration 파일 추가하기
 pip를 이용해 Kochat을 다운로드 받았다면 프로젝트에, kochat의 configuration 파일을 추가해야합니다.
 [kochat_config.zip](https://github.com/gusdnd852/kochat/files/4853859/kochat_config.zip) 을 
 다운로드 받고 압축을 풀어서 interpreter의 working directory에 넣습니다. (kochat api를 실행하는 파일과
@@ -280,7 +283,7 @@ config 파일에는 다양한 설정 값들이 존재하니 확인하고 입맛�
 
 <br>
 
-### 3.5 데이터셋 넣기
+### 4.5 데이터셋 넣기
 이제 여러분이 학습시킬 데이터셋을 넣어야합니다. 
 그 전에 데이터셋의 포맷에 대해서 간단하게 알아봅시다. 
 Kochat은 기본적으로 Slot filling을 기반으로
@@ -290,7 +293,7 @@ Kochat은 기본적으로 Slot filling을 기반으로
 아래 데이터셋 규칙들에 맞춰서 데이터를 생성해주세요
 <br><br>
 
-#### 3.5.1. 데이터 포맷
+#### 4.5.1. 데이터 포맷
 기본적으로 intent와 entity를 나누려면, 두가지를 모두 구분할 수 있어야합니다.
 그래서 선택한 방식은 인텐트는 파일로 구분, 엔티티는 라벨로 구분하는 것이였습니다.
 추후 릴리즈 버전에서는 Rasa처럼 훨씬 쉬운 방식으로 변경하려고 합니다만, 초기버전에서는
@@ -314,27 +317,27 @@ question,label
 ```
 question,label
 어디 관광지 가겠냐,O O O
-파주 유명한 공연장 알려줘,S-LOCATION O S-TRAVEL O
-창원 여행 갈만한 바다,S-LOCATION O O S-TRAVEL
-평택 갈만한 스키장 여행 해보고 싶네,S-LOCATION O S-TRAVEL O O O
-제주도 템플스테이 여행 갈 데 추천해 줘,S-LOCATION S-TRAVEL O O O O O
-전주 가까운 바다 관광지 보여줘 봐요,S-LOCATION O S-TRAVEL O O O
-용인 가까운 축구장 어딨어,S-LOCATION O S-TRAVEL O
+파주 유명한 공연장 알려줘,S-LOCATION O S-PLACE O
+창원 여행 갈만한 바다,S-LOCATION O O S-PLACE
+평택 갈만한 스키장 여행 해보고 싶네,S-LOCATION O S-PLACE O O O
+제주도 템플스테이 여행 갈 데 추천해 줘,S-LOCATION S-PLACE O O O O O
+전주 가까운 바다 관광지 보여줘 봐요,S-LOCATION O S-PLACE O O O
+용인 가까운 축구장 어딨어,S-LOCATION O S-PLACE O
 붐비는 관광지,O O
-청주 가을 풍경 예쁜 산 가보고 싶어,S-LOCATION S-DATE O O S-TRAVEL O O
+청주 가을 풍경 예쁜 산 가보고 싶어,S-LOCATION S-DATE O O S-PLACE O O
 ... (생략)
 ```
 
 위 처럼 question,label이라는 헤더(컬럼명)을 가장 윗줄에 위치시키고,
 그 아래로 두개의 컬림 question과 label에 해당하는 내용을 작성합니다.
 각 단어 및 엔티티는 띄어쓰기로 구분됩니다.
-예시 데이터는 BIO태깅을 개선한 BIOES태깅을 사용하여 라벨링했는데, 엔티티 태깅 방식은 자유롭게
+데모 데이터는 BIO태깅을 개선한 BIOES태깅을 사용하여 라벨링했는데, 엔티티 태깅 방식은 자유롭게
 고르셔도 됩니다. (config에서 설정 가능합니다.) 엔티티 태깅 스키마에 관련된 자세한 내용은 
 [여기](https://en.wikipedia.org/wiki/Inside%E2%80%93outside%E2%80%93beginning_(tagging)) 를 참고하세요.
 
 <br>
 
-#### 3.5.2. 데이터셋 저장 경로
+#### 4.5.2. 데이터셋 저장 경로
 데이터셋 저장경로는 기본적으로 config파일이 있는 곳을 root로 생각했을 때,
 "root/data/raw"입니다. 이 경로는 config의 DATA 챕터에서 변경 가능합니다.
 ```
@@ -348,7 +351,7 @@ root
 ```
 <br>
 
-#### 3.5.3. 인텐트 단위로 파일 분할
+#### 4.5.3. 인텐트 단위로 파일 분할
 각 인텐트 단위로 파일을 분할합니다. 이 때, 파일명이 인텐트명이 됩니다.
 파일명은 한글로 해도 상관 없긴 하지만, 리눅스 운영체제의 경우 시각화시 
 matplotlib에 한글폰트가 설치되어있지 않다면 글자가 깨지니,
@@ -365,7 +368,7 @@ root
 ```
 <br>
 
-#### 3.5.4. 파일의 헤더(컬럼명) 설정
+#### 4.5.4. 파일의 헤더(컬럼명) 설정
 파일의 헤더(컬럼명)은 반드시 question과 label로 해주세요.
 헤더를 config에서 바꿀 수 있게 할까도 생각했지만, 
 별로 큰 의미가 없는 것 같아서
@@ -376,7 +379,7 @@ question,label ← 중요 !!!
 ```
 <br>
 
-#### 3.5.4. 라벨링 실수 검출기능
+#### 4.5.5. 라벨링 실수 검출
 샘플 당 question의 단어 갯수와 label의 엔티티 갯수는 동일해야하며 config에 정의한 엔티티만 사용 가능합니다.
 이러한 라벨링 실수는 Kochat이 데이터를 변환할때 검출해서 어디가 틀렸는지 알려줍니다.
 
@@ -398,7 +401,7 @@ case 2: 라벨링 오타 방지
 DATA = {
     ... (생략)
 
-    'NER_categories': ['DATE', 'LOCATION', 'RESTAURANT', 'TRAVEL'],  # 사용자 정의 태그
+    'NER_categories': ['DATE', 'LOCATION', 'RESTAURANT', 'PLACE'],  # 사용자 정의 태그
     'NER_tagging': ['B', 'E', 'I', 'S'],  # NER의 BEGIN, END, INSIDE, SINGLE 태그
     'NER_outside': 'O',  # NER의 O태그 (Outside를 의미)
 }
@@ -411,7 +414,7 @@ NER_tagging + '-' + NER_categories의 형태가 아니면 에러를 반환합니
 ```
 <br>
 
-#### 3.5.5. OOD 데이터셋
+#### 4.5.6. OOD 데이터셋
 OOD란 Out of distribution의 약자로, 분포 외 데이터셋을 의미합니다.
 즉, 현재 챗봇이 지원하는 기능 이외의 데이터를 의미합니다.
 OOD 데이터셋이 없어도 Kochat을 이용하는데에는 아무런 문제가 없지만,
@@ -434,11 +437,11 @@ root
 <br>
 
 OOD 데이터셋은 아래와 같이 question과 OOD의 의도로 라벨링합니다.
-예시 데이터셋은 전부 의도대로 라벨링했지만, 이 의도값을 사용하진 않기 때문에
+데모 데이터셋은 전부 의도대로 라벨링했지만, 이 의도값을 사용하진 않기 때문에
 그냥 아무값으로나 라벨링해도 사실 무관합니다.
 
 ```
-예시_ood_데이터.csv
+데모_ood_데이터.csv
 
 question,label
 최근 있던일 최근 이슈 알려줘,뉴스이슈
@@ -462,7 +465,7 @@ question,label
 
 이렇게 라벨링 해도 되지만 어차피 라벨 데이터를 사용하지 않기 때문에 아래처럼 라벨링해도 무관합니다.
 ```
-예시_ood_데이터.csv
+데모_ood_데이터.csv
 
 question,label
 최근 있던일 최근 이슈 알려줘,OOD
@@ -484,13 +487,13 @@ question,label
 ```
 
 OOD 데이터는 물론 많으면 좋겠지만 만드는 것 자체가 부담이기 때문에 적은 수만 넣어도 됩니다.
-예시 데이터의 경우는 총 3000라인의 데이터 중 600라인정도의 OOD 데이터를 삽입하였습니다.
+데모 데이터의 경우는 총 3000라인의 데이터 중 600라인정도의 OOD 데이터를 삽입하였습니다.
 데이터까지 모두 삽입하셨다면 kochat을 이용할 준비가 끝났습니다. 아래 챕터에서는 
 자세한 사용법에 대해 알려드리겠습니다.
 <br><br><br>
 
-## 4. Usage
-### 4.1. `from kochat.data`
+## 5. Usage
+### 5.1. `from kochat.data`
 `kochat.data` 패키지에는 `Dataset` 클래스가 있습니다. `Dataset`클래스는 
 분리된 raw 데이터 파일들을 하나로 합쳐서 통합 intent파일과 통합 entity파일로 만들고, 
 embedding, intent, entity, inference에 관련된 데이터셋을 미니배치로 잘라서 
@@ -554,14 +557,14 @@ entity_dict = dataset.entity_dict
 교체할 예정입니다.
 <br><br><br>
 
-### 4.2. `from kochat.model`
+### 5.2. `from kochat.model`
 `model` 패키지는 사전 정의된 다양한 built-in 모델들이 저장된 패키지입니다.
 현재 버전에서는 아래 목록에 해당하는 모델들을 지원합니다. 추후 버전이 업데이트 되면
 지금보다 훨씬 다양한 built-in 모델을 지원할 예정입니다. 아래 목록을 참고하여 사용해주시길 바랍니다.
 
 <br>
 
-#### 4.2.1. embed 모델
+#### 5.2.1. embed 모델
 ```python
 from kochat.model import embed
 
@@ -575,7 +578,7 @@ fasttext = embed.FastText()
 ```
 <br>
 
-#### 4.2.2. intent 모델
+#### 5.2.2. intent 모델
 ```python
 from kochat.model import intent
 
@@ -588,7 +591,7 @@ lstm = intent.LSTM(label_dict=dataset.intent_dict, bidirectional=True)
 ```
 <br>
 
-#### 4.2.3. entity 모델
+#### 5.2.3. entity 모델
 ```python
 from kochat.model import entity
 
@@ -598,14 +601,14 @@ lstm = entity.LSTM(label_dict=dataset.entity_dict, bidirectional=True)
 ```
 <br>
 
-#### 4.2.4. 커스텀 모델
+#### 5.2.4. 커스텀 모델
 Kochat은 커스텀 모델을 지원합니다. 
 Gensim이나 Pytorch로 작성한 커스텀 모델을 직접 학습시키기고 챗봇 애플리케이션에 
 사용할 수 있습니다. 그러나 만약 커스텀 모델을 사용하려면 아래의 몇가지 규칙을 반드시 
 따라야합니다.
 <br><br>
 
-#### 4.2.4.1. 커스텀 Gensim embed 모델
+#### 5.2.4.1. 커스텀 Gensim embed 모델
 임베딩의 경우 현재는 Gensim 모델만 지원합니다. 추후에 Pytorch로 된
 임베딩 모델(ELMO, BERT)등도 지원할 계획입니다.
 Gensim Embedding 모델은 아래와 같은 형태로 구현해야합니다.
@@ -638,7 +641,7 @@ class FastText(FastText):
 ```
 <br><br>
 
-#### 4.2.4.2. 커스텀 Intent 모델
+#### 5.2.4.2. 커스텀 Intent 모델
 인텐트 모델은 torch로 구현합니다.
 인텐트 모델에는 `self.label_dict` 가 반드시 존재해야합니다. 
 또한 최종 output 레이어는 자동생성되기 때문에 feature만 출력하면 됩니다.
@@ -726,7 +729,7 @@ class LSTM(nn.Module):
 ```
 <br><br>
 
-#### 4.2.4.3. 커스텀 Entity 모델
+#### 5.2.4.3. 커스텀 Entity 모델
 엔티티 모델도 역시 torch로 구현합니다.
 엔티티 모델에도 역시 `self.label_dict` 가 반드시 존재해야하며, 
 또한 최종 output 레이어는 자동생성되기 때문에 feature만 출력하면 됩니다.
@@ -780,14 +783,14 @@ class LSTM(nn.Module):
 ```
 <br><br><br>
 
-### 4.3. `from kochat.proc`
+### 5.3. `from kochat.proc`
 `proc`은 Procssor의 줄임말로, 다양한 모델들의 
 학습/테스트을 수행하는 함수인 `fit()`과
 추론을 수행하는 함수인 `predict()` 등을 수행하는 클래스 집합입니다.
 현재 지원하는 프로세서는 총 4가지로 아래에서 자세하게 설명합니다.
 <br><br>
 
-#### 4.3.1. `from kochat.proc import GensimEmbedder`
+#### 5.3.1. `from kochat.proc import GensimEmbedder`
 GensimEmbedder는 Gensim의 임베딩 모델을 학습시키고,
 학습된 모델을 사용해 문장을 임베딩하는 클래스입니다. 자세한 사용법은 다음과 같습니다.
 
@@ -812,8 +815,8 @@ user_input = emb.predict("서울 홍대 맛집 알려줘")
 ```
 <br><br>
 
-#### 4.3.2. `from kochat.proc import SoftmaxClassifier`
-`SoftmaxClassifier`는 가장 기본적인 Intent 분류 프로세서입니다.
+#### 5.3.2. `from kochat.proc import SoftmaxClassifier`
+`SoftmaxClassifier`는 가장 기본적인 분류 프로세서입니다.
 이름이 SoftmaxClassifier인 이유는 Softmax Score를 이용해 Fallback Detection을 수행하기 때문에
 이렇게 명명하게 되었습니다. 그러나 몇몇 [논문](https://arxiv.org/abs/1412.1897)
 에서 Calibrate되지 않은 Softmax Score을 마치 Confidence처럼
@@ -859,15 +862,15 @@ clf.predict(dataset.load_predict("오늘 서울 날씨 어떨까", emb))
 
 <br>
 
-#### 4.3.3. `from kochat.proc import DistanceClassifier`
+#### 5.3.3. `from kochat.proc import DistanceClassifier`
 `DistanceClassifier`는 `SoftmaxClassifier`와는 다르게 거리기반으로 작동하며,
 일종의 Memory Network입니다. [batch_size, -1] 의 사이즈로 출력된 출력벡터와 
 기존 데이터셋에 있는 문장 벡터들 사이의 거리를 계산하여 데이터셋에서 가장 가까운 
 K개의 샘플을 찾고 최다 샘플 클래스로 분류하는 최근접 이웃 Retrieval 기반의 분류 모델입니다.
 <br><br>
 
-이 때 각 클래스들 사이의 거리가 멀고, 같은 클래스끼리는 가까이 있어야
-분류하는데 좋기 때문에 사용자가 설정한 Loss함수(주로 Margin 기반 Loss)를 
+이 때 다른 클래스들은 멀리, 같은 클래스끼리는 가까이 있어야
+분류하기에 좋기 때문에 사용자가 설정한 Loss함수(주로 Margin 기반 Loss)를 
 적용해 Metric Learning을 수행해서 클래스 간의 Margin을 최대치로 벌리는 
 메커니즘이 구현되어있습니다. 또한 최근접 이웃 알고리즘의 K값은 config에서 
 직접 지정 할 수도 있고 GridSearch를 적용하여 자동으로 최적의 K값을 찾을 수 있게 설계하였습니다. 
@@ -911,7 +914,7 @@ clf.predict(dataset.load_predict("오늘 서울 날씨 어떨까", emb))
 ```
 <br><br>
 
-#### 4.3.4. `FallbackDetector`
+#### 5.3.4. `FallbackDetector`
 `SoftmaxClassifier`와 `DistanceClassifier` 모두 Fallback Detection 기능을 구현되어있습니다.
 Fallback Detection 기능을 이용하는 방법은 아래와 같이 두 가지 방법을 제공합니다.
 
@@ -1026,13 +1029,13 @@ INTENT = {
 
 그러나 지금 버전에서는 가급적 OOD 데이터셋을 추가해서 이용해주세요. 
 정 없으시면 제가 데모 폴더에 넣어놓은 데이터라도 넣어서 자동화해서 쓰는게 
-성능 훨씬 좋습니다. 몇몇 빌더들은 이 임계치를 직접 정하게 하거나 그냥 고정값으로 
+성능 훨씬 좋습니다. 몇몇 빌더들은 이 임계치를 직접 정하게 하거나 그냥 상수로 
 fix해놓는데, 개인적으로 이걸 그냥 상수로 fix 해놓거나 유저보고 직접 정하게 하는건 
 챗봇 빌더로서, 혹은 프레임워크로서 너무 무책임한 것 아닌가 싶습니다. 
 (심지어 그런 빌더들은 metric이 뭔지도 모르는데 유저가 그걸 어떻게 정하라는건지..)
 <br><br><br>
 
-#### 4.3.5. `from kochat.proc import EntityRecongnizer`
+#### 5.3.5. `from kochat.proc import EntityRecongnizer`
 `EntityRecongnizer`는 엔티티 검출을 담당하는 Entity 모델들을 학습/테스트 시키고 추론하는 
 클래스입니다. Entity 검사의 경우 문장 1개당 라벨이 여러개(단어 갯수와 동일)입니다.
 문제는 Outside 토큰인 'O'가 대부분이기 때문에 전부다 'O'라고만 예측해도 거의 90% 육박하는
@@ -1075,14 +1078,14 @@ rcn.predict(dataset.load_predict("오늘 서울 날씨 어떨까", emb))
 
 <br><br>
 
-### 4.4. `from kochat.loss`
+### 5.4. `from kochat.loss`
 `loss` 패키지는 사전 정의된 다양한 built-in Loss 함수들이 저장된 패키지입니다.
 현재 버전에서는 아래 목록에 해당하는 Loss 함수들을 지원합니다. 추후 버전이 업데이트 되면
 지금보다 훨씬 다양한 built-in Loss 함수를 지원할 예정입니다. 아래 목록을 참고하여 사용해주시길 바랍니다.
 
 <br>
 
-#### 4.4.1. intent loss 함수
+#### 5.4.1. intent loss 함수
 Intent Loss 함수는 기본적인 CrossEntropyLoss와 다양한 Distance 기반의 Loss함수를
 활용할 수 있습니다. CrossEntropy는 후술할 Softmax 기반의 IntentClassifier에 주로
 활용하고, Distance 기반의 Loss 함수들은 Distance 기반의 IntentClassifier에 
@@ -1116,7 +1119,7 @@ cosface = CosFace(label_dict=dataset.intent_dict)
 ```
 <br>
 
-#### 4.4.2. entity loss 함수
+#### 5.4.2. entity loss 함수
 Entity Loss 함수는 기본적인 CrossEntropyLoss와 확률적 모델인
 Conditional Random Field (이하 CRF) Loss를 지원합니다.
 CRF Loss를 적용하면, EntityRecognizer의 출력 결과를 다시한번 교정하는
@@ -1137,7 +1140,7 @@ center_loss = CRFLoss(label_dict=dataset.intent_dict)
 ```
 <br>
 
-#### 4.4.3. 커스텀 loss 함수
+#### 5.4.3. 커스텀 loss 함수
 Kochat은 커스텀 모델을 지원합니다. 
 Pytorch로 작성한 커스텀 모델을 직접 학습시키기고 챗봇 애플리케이션에 
 사용할 수 있습니다. 그러나 만약 커스텀 모델을 사용하려면 아래의 몇가지 규칙을 반드시 
@@ -1217,22 +1220,23 @@ class CenterLoss(BaseLoss):
 ```
 <br><br><br>
 
-### 4.5. `from kochat.app`
+### 5.5. `from kochat.app`
 `app` 패키지는 kochat 모델을 애플리케이션으로 배포할 수 있게끔 해주는 
 RESTful API인 `KochatApi`클래스와 API 호출에 관련된 시나리오를 
 작성할 수 있게끔 하는 `Scenario`클래스를 제공합니다.
 
 <br>
 
-#### 4.5.1 `from kochat.app import Scenario`
+#### 5.5.1 `from kochat.app import Scenario`
 `Scenario` 클래스는 어떤 intent에서는 어떤 entity가 필요하고, 
 어떤 api를 호출하는지 정의하는 일종의 명세서와 같습니다. 
 시나리오 작성시 아래와 같은 몇가지 주의사항이 있습니다.
 
 1. intent는 반드시 raw데이터 파일 명과 동일하게 설정하기
 2. api는 함수 그 자체를 넣습니다 (반드시 callable 해야합니다.)
-3. scenario_dict 정의시에 KEY값은 api 함수와 순서/철자가 동일해야합니다.
-4. 기본값(default) 설정을 원하면 scenario_dict 리스트에 값을 첨가합니다.
+3. scenario 딕셔너리 정의시에 KEY값은 api 함수와 순서/철자가 동일해야합니다.
+4. scenario 딕셔너리 정의시에 KEY값은 config의 NER_categories에 정의된 엔티티만 허용됩니다.
+4. 기본값(default) 설정을 원하면 scenario 딕셔너리의 리스트에 값을 첨가합니다.
 <br><br>
 
 - kocrawl (날씨) 예제
@@ -1249,7 +1253,7 @@ weather_scenario = Scenario(
     intent='weather',  # intent는 인텐트 명을 적습니다 (raw 데이터 파일명과 동일해야합니다)
     api=WeatherCrawler().request, # API는 함수 이름 자체를 넣습니다. (callable해야합니다)
 
-    scenario_dict={
+    scenario={
         'LOCATION': [],
         # 기본적으로 'KEY' : []의 형태로 만듭니다.
 
@@ -1260,12 +1264,18 @@ weather_scenario = Scenario(
     }
 
     # 시나리오 딕셔너리를 정의합니다.
-    # 주의점 1 : scenario_dict 키값(LOCATION, DATE)의 순서는 API 함수의 파라미터 순서와 동일해야합니다.
-    # 주의점 2 : scenario_dict 키값(LOCATION, DATE)의 철자는 API 함수의 파라미터 철자와 동일해야합니다.
-    # 대/소문자까지 동일할 필요는 없습니다. 정확한 값 전달을 위해 일부러 만든 두 가지 제한사항입니다.
-    
+    # 주의점 1 : scenario 키값(LOCATION, DATE)의 순서는 API 함수의 파라미터 순서와 동일해야합니다.
+    # 주의점 2 : scenario 키값(LOCATION, DATE)의 철자는 API 함수의 파라미터 철자와 동일해야합니다.
+    # 주의점 3 : raw 데이터 파일에 라벨링한 엔티티명과 scenario 키값은 동일해야합니다. 
+    #           즉 config의 NER_categories에 미리 정의된 엔티티만 사용하셔야합니다.
+    #           B-, I- 등의 BIO태그는 생략합니다. (S-DATE → DATE로 생각)
+
+    # 대/소문자까지 동일할 필요는 없고, 철자만 같으면 됩니다. (모두 lowercase 상태에서 비교)
+    # 다소 귀찮더라도 정확한 값 전달을 위해 일부러 만든 세 가지 제한사항이니 따라주시길 바랍니다.
+
     # WeatherCrawler().request의 파라미터는 WeatherCrawler().request(location, date)입니다.
-    # 주의점 1인 순서와 주의점 2인 철자가 모두 동일합니다. (만약 틀리면 어디서 틀렸는지 에러로 알려드립니다) 
+    # API파라미터와 순서/이름이 동일하며, 데모 데이터 파일에 있는 엔티티인 LOCATION, DATE와 동일합니다.
+    # 만약 틀리면 어디서 틀렸는지 에러 메시지로 알려드립니다.
 )      
 ```
 
@@ -1283,41 +1293,334 @@ reservation_scenario = Scenario(
     # 함수를 호출하지 말고 그 자체를 파라미터로 입력합니다.
     # 함수를 받아서 저장해뒀다가 요청 발생시 Api 내부에서 call 합니다
     
-    scenario_dict={
+    scenario={
         'NUM_PEOPLE': [4],
+        # NUM_PEOPLE의 default를 4명으로 설정했습니다.
+
         'RESERVATION_TIME': []
 
-        # 파라미터와 순서/철자가 일치합니다.
-        # NUM_PEOPLE의 default를 4명으로 설정했습니다.
+        # API(reservation_check(num_people, reservation_time)의 파라미터와 순서/철자가 일치합니다.
+        # 이 때, 반드시 NER_categories에 NUM_PEOPLE과 RESERVATION_TIME이 정의되어 있어야하며,
+        # 실제 raw데이터에 라벨링된 레이블도 위의 이름을 사용해야합니다.
     }
 )     
 ```
 <br><br>
 
+#### 5.5.2. `from kochat.app import KochatApi`
+`KochatApi`는 Flask로 구현되었으며 restful api를 제공하는 클래스입니다.
+아래와 같은 메소드들을 지원하며 사용법은 다음과 같습니다.
 
-## 5. Visualization Support
+```python
+from kochat.app import KochatApi
 
-## 6. Performance Issue
 
-## 7. Contributor
+# kochat api 객체를 생성합니다.
+kochat = KochatApi(
+    dataset=dataset, # 데이터셋 객체
+    embed_processor=emb, # 임베딩 프로세서
+    intent_classifier=clf, # 인텐트 분류기
+    entity_recognizer=rcn, # 엔티티 검출기
+    scenarios=[weather, dust, travel, restaurant] 
+)  # 시나리오 객체 리스트
 
-## 8. TODO List
+
+# 임베딩 모델을 학습합니다.
+kochat.fit_embed()
+
+# 인텐트 모델을 학습합니다.
+kochat.fit_intent()
+
+# 엔티티 모델을 학습합니다.
+kochat.fit_entity()
+
+# 모든 모델을 학습합니다.
+kochat.fit_all()
+
+# 서버를 동작시킵니다.
+kochat.run(port=8081)
+```
+
+<br>
+
+위와 같이 kochat 서버를 실행시킬 수 있습니다. 현재 kochat api는 
+다음과 같은 4개의 url 패턴을 지원합니다.
+
+<br>
+
+#### 5.5.2.1. request
+가장 기본적인 request입니다. intent분류, entity검출, api연결을 한번에 진행합니다.
+<br>
+기본 패턴 : https://youripaddress/request/<uid>/<text>
+```
+case 1. state SUCCESS
+모든 entity가 정상적으로 입력된 경우 state 'SUCCESS'를 반환합니다.
+
+>>> 유저 gusdnd852 : 모레 부산 날씨 어때
+
+https://123.456.789.000:1234/request/gusdnd852/모레 부산 날씨 어때
+→ {
+    'input': [모레, 부산, 날씨, 어때],
+    'intent': 'weather',
+    'entity': [S-DATE, S-LOCATION, O, O]
+    'state': 'SUCCESS',
+    'answer': '부산의 날씨 정보를 전해드릴게요. 😉
+               모레 부산지역은 오전에는 섭씨 19도이며, 아마 하늘이 맑을 것 같아요. 오후에도 섭씨 26도이며, 아마 하늘이 맑을 것 같아요.'
+}
+
+
+case 2. state REQUIRE_XXX
+만약 default값이 없는 엔티티가 입력되지 않은 경우 state 'REQUIRE_XXX'를 반환합니다.
+두개 이상의 엔티티가 모자라면 state 'REQUIRE_XXX_YYY'가 반환됩니다.
+
+>>> 유저 minqukanq : 목요일 날씨 어때
+
+e.g. https://123.456.789.000:1234/request/minqukanq/목요일 날씨 어때
+→ {
+    'input': [목요일, 날씨, 어때],
+    'intent': 'weather',
+    'entity': [S-DATE, O, O]
+    'state': 'REQUIRE_LOCATION',
+    'answer': None
+}
+
+
+case 3. state FALLBACK
+인텐트 분류시 FALLBACK이 발생하면 FALLBACK을 반환합니다.
+
+>>> 유저 sangji11 : 목요일 친구 생일이다
+
+e.g. https://123.456.789.000:1234/request/sangji11/목요일 친구 생일이다
+→ {
+    'input': [목요일, 친구, 생일이다],
+    'intent': 'FALLBACK',
+    'entity': [S-DATE, O, O]
+    'state': 'FALLBACK',
+    'answer': None
+}
+```
+
+<br>
+
+#### 5.5.2.2. fill_slot
+가장 request시 REQUIRE_XXX가 나올때, 사용자에게 되묻고 기존 딕셔너리에 추가해서 api를 호출합니다.
+<br>
+기본 패턴 : https://youripaddress/fill_slot//<text>
+```
+>>> 유저 gusdnd852 : 모레 날씨 알려줘 → REQUIRE_LOCATION
+>>> 봇 : 어느 지역을 알려드릴까요?
+>>> 유저 gusdnd852 : 부산
+
+https://123.456.789.000:1234/fill_slot/gusdnd852/부산
+→ {
+    'input': [부산] + [모레, 날씨, 어때],
+    'intent': 'weather',
+    'entity': [S-LOCATION] + [S-DATE, O, O]
+    'state': 'SUCCESS',
+    'answer': '부산의 날씨 정보를 전해드릴게요. 😉
+               모레 부산지역은 오전에는 섭씨 19도이며, 아마 하늘이 맑을 것 같아요. 오후에도 섭씨 26도이며, 아마 하늘이 맑을 것 같아요.'
+}
+
+
+>>> 유저 gusdnd852 : 날씨 알려줘 → REQUIRE_DATE_LOCATION
+>>> 봇 : 언제의 어느 지역을 날씨를 알려드릴까요?
+>>> 유저 gusdnd852 : 부산 모레
+
+https://123.456.789.000:1234/fill_slot/gusdnd852/부산 모레
+→ {
+    'input': [부산, 모레] + [날씨, 어때],
+    'intent': 'weather',
+    'entity': [S-LOCATION, S-DATE] + [O, O]
+    'state': 'SUCCESS',
+    'answer': '부산의 날씨 정보를 전해드릴게요. 😉
+               모레 부산지역은 오전에는 섭씨 19도이며, 아마 하늘이 맑을 것 같아요. 오후에도 섭씨 26도이며, 아마 하늘이 맑을 것 같아요.'
+}
+```
+
+<br>
+
+#### 5.5.2.3. get_intent
+intent만 알고싶을때 호출합니다.
+<br>
+기본 패턴 : https://youripaddress/get_intent/<text>
+```
+
+https://123.456.789.000:1234/get_intent/전주 날씨 어때
+→ {
+    'input': [전주, 날씨, 어때],
+    'intent': 'weather',
+    'entity': None,
+    'state': 'REQUEST_INTENT',
+    'answer': None
+}
+```
+
+<br>
+
+#### 5.5.2.4. get_entity
+entity만 알고싶을때 호출합니다.
+<br>
+기본 패턴 : https://youripaddress/get_entity/<text>
+```
+
+https://123.456.789.000:1234/get_entity/전주 날씨 어때
+→ {
+    'input': [전주, 날씨, 어때],
+    'intent': None,
+    'entity': [S-LOCATION, O, O],
+    'state': 'REQUEST_ENTITY',
+    'answer': None
+}
+```
+
+<br>
+
+
+## 6. Visualization Support
+Kochat은 아래와 같이 다양한 시각화 기능을 지원합니다.
+Feature Space는 일정 Epoch마다 메모리에 저장되고,
+그 외의 시각화 자료는 매 Epoch마다 계속 업데이트 되며
+"root/saved"에 모델 저장파일과 함께 저장됩니다.
+시각화 자료 및 모델 저장 경로는 
+config에서 변경할 수 있습니다.
+<br><br>
+
+#### 6.1. Train/Test Accuracy
+
+![](https://user-images.githubusercontent.com/38183241/86322540-2455ff80-bc76-11ea-9cb6-ec6eb196b89b.png)
+
+<br><br>
+
+#### 6.2. Train/Test Recall (macro average)
+![](https://user-images.githubusercontent.com/38183241/86322532-21f3a580-bc76-11ea-9ef7-accf6ae7db19.png)
+
+<br><br>
+
+#### 6.3. Train/Test Precision (macro average)
+![](https://user-images.githubusercontent.com/38183241/86322531-215b0f00-bc76-11ea-8844-1ee812e64c74.png)
+
+<br><br>
+
+#### 6.4. Train/Test F1-Score (macro average)
+![](https://user-images.githubusercontent.com/38183241/86322529-2029e200-bc76-11ea-9163-30934b8bc5ff.png)
+
+<br><br>
+
+#### 6.5. Train/Test Confusion Matrix
+![](https://user-images.githubusercontent.com/38183241/86322539-2455ff80-bc76-11ea-94d5-9a83d0eb1cf5.png)
+
+![](https://user-images.githubusercontent.com/38183241/86322538-23bd6900-bc76-11ea-9953-f0ab7ee7150b.png)
+
+Confusion Matrix의 경우는 X축(아래)가 Prediction, Y축(왼쪽)이 Label입니다. 
+<br>다음 버전에서 xticks와 yticks를 추가할 예정입니다.
+
+<br><br>
+
+#### 6.5. Train/Test Classification Performance Report
+
+Accuracy, Precision, Recall, F1 Score 등 모델을 다양한 메트릭으로 평가하고,
+표 형태로 이미지파일을 만들어줍니다.
+
+![](https://user-images.githubusercontent.com/38183241/86322537-2324d280-bc76-11ea-962b-80d23e701691.png)
+
+![](https://user-images.githubusercontent.com/38183241/86322534-228c3c00-bc76-11ea-923e-1a0d9b3ad107.png)
+
+<br>
+
+소수점 몇번째 까지 반올림해서 보여줄지 config에서 설정할 수 있습니다.
+```python
+PROC = {
+    # ...(생략)
+    'logging_precision': 5,  # 결과 저장시 반올림 소수점 n번째에서 반올림
+}
+```
+
+<br><br>
+
+#### 6.6. Train/Test Fallback Detection Performance Report
+
+Fallback Detection은 Intent Classification의 영역입니다. Intent Classification만 지원합니다.
+
+![](https://user-images.githubusercontent.com/38183241/86323442-d17d4780-bc77-11ea-8c15-8be1eb4fa6e5.png)
+
+<br><br>
+
+#### 6.7. Feature Space Visualization
+
+Feature Space는 Distance 기반의 Metric Learning Loss함수가 잘 작동하고 있는지
+확인하기 위한것으로 Intent Classification만 지원합니다.
+또한 시각화 차원은 config의 d_loss에 따라 결정됩니다.
+
+- d_loss = 2인 경우 : 2차원으로 시각화
+- d_loss = 3인 경우 : 3차원으로 시각화
+- d_loss > 3인 경우 : Incremetal PCA를 통해 3차원으로 차원 감소 후 시각화
+<br>
+
+![](https://user-images.githubusercontent.com/38183241/86323429-c62a1c00-bc77-11ea-9caf-ede65f4cbc6c.png)
+<br><br>
+
+Feature Space Visualization은 PCA를 실행하기 때문에 비용이 상당히 큽니다.
+다른 시각화는 매 Epoch마다 수행하지만, Feature Space Visulization은 몇 Epoch마다 
+수행할지 결정할 수 있습니다. 
+
+```python
+PROC = {
+    # ...(생략)
+    'visualization_epoch': 50,  # 시각화 빈도 (애폭마다 시각화 수행)
+}
+```
+<br><br>
+
+## 7. Performance Issue
+이 챕터는 Kochat의 다양한 성능 이슈에 대해 기록합니다.
+<br><br>
+
+#### 7.1. DistanceClassifier는 CNN이 더 좋다.
+Distance Classification의 경우 LSTM보다 CNN의 Feature들이 클래스별로 훨씬 잘 구분되는 것을 확인했습니다.
+Feature Extraction 능력 자체는 CNN이 좋다고 알려진 것처럼 아무래도 CNN이 Feature를 더 잘 뽑아내는 것 같습니다.
+Feature Space에서 구분이 잘 된다는 것은 OOD 성능이 우수하다는 것과 동치이므로, LSTM보단
+CNN을 사용하는 것이 더욱 바람직해보입니다.
+<br><br>
+
+#### 7.2. CRF Loss의 수렴 속도는 느리다.
+EntityRecognizer의 경우 동일 사이즈, 동일 Layer에서 CRF Loss를 사용하면
+더 느리게 수렴하는 것을 확인했습니다. CRF의 경우 조금 더 많은 학습 시간을 줘야 
+제 성능을 내는 것 같습니다.
+<br><br>
+
+#### 7.3. FallbackDetector의 max_iter는 높게 설정해야한다.
+Fallback Detector는 sklearn 모델들을 활용하는데 기존 sklearn모델들은
+max_iter의 default값이 100으로 설정되어 수렴하기 전에 학습이 끝나버립니다.
+때문에 Fallback Detector를 config에 정의할때 max_iter를 높게 설정해야
+충분한 학습시간을 보장받을 수 있습니다.
+<br><br>
+
+## 8. Contributor
+만약 본인이 원하는 기능을 Kocchat에 추가하고 싶으시다면 언제든지 컨트리뷰션 할 수 있습니다.
+<br><br><br>
+
+
+## 9. TODO List
 - [x] ver 1.0 : 엔티티 학습에 CRF 및 로스 마스킹 추가하기 
 - [x] ver 1.0 : 상세한 README 문서 작성 및 PyPI 배포하기
 - [x] ver 1.0 : 간단한 웹 인터페이스 기반 데모 애플리케이션 제작하기
 - [ ] ver 1.0 : Jupyter Note Example 작성하기 + Binder 실행 환경
 - [ ] ver 1.1 : 데이터셋 포맷 RASA처럼 markdown에 대괄호 형태로 변경
 - [ ] ver 1.2 : Transformer 기반 모델 추가 (SK KOBERT)
-- [ ] ver 1.3 : Pytorch Embedding 모델 추가 (CharCNN + ELMO 추가)
-- [ ] ver 1.4 : Seq2Seq 추가해서 Fallback시 대처할 수 있게 만들기 (SK KOGPT2)
+- [ ] ver 1.3 : Seq2Seq 추가해서 Fallback시 대처할 수 있게 만들기 (SK KOGPT2)
+- [ ] ver 1.4 : Pytorch Embedding 모델 추가 (CharCNN + ELMO 추가)
 - [ ] ver 1.5 : 네이버 맞춤법 검사기 제거하고, 자체적인 띄어쓰기 검사모듈 추가
 - [ ] ver 1.5 : BERT와 Markov 체인을 이용한 자동 OOD 데이터 생성기능 추가
 - [ ] ver 1.7 : 대화 흐름관리를 위한 Story 관리 기능 구현해서 추가하기
 <br><br><br>
 
-## 9. Reference
+## 10. Reference
+- [챗봇 분류 그림](https://towardsdatascience.com/chatbots-are-cool-a-framework-using-python-part-1-overview-7c69af7a7439)
+- [seq2seq 그림](https://mc.ai/implement-of-seq2seq-model/)
+- [Fallback Detection 그림](https://docs.smartly.ai/docs/intent-detection)
+<br><br><br>
 
-## 10. License
+## 11. License
 ```
 Copyright 2020 Kochat.
 

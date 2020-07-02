@@ -10,11 +10,10 @@ from kocrawl.retaurant import RestaurantCrawler
 from kocrawl.weather import WeatherCrawler
 from kochat.app import Scenario
 
-
 weather = Scenario(
     intent='weather',
     api=WeatherCrawler().request,
-    scenario_dict={
+    scenario={
         'LOCATION': [],
         'DATE': ['오늘']
     }
@@ -23,26 +22,26 @@ weather = Scenario(
 dust = Scenario(
     intent='dust',
     api=DustCrawler().request,
-    scenario_dict={
+    scenario={
         'LOCATION': [],
         'DATE': ['오늘']
-    }
-)
-
-travel = Scenario(
-    intent='travel',
-    api=MapCrawler().request,
-    scenario_dict={
-        'LOCATION': [],
-        'TRAVEL': ['여행지']
     }
 )
 
 restaurant = Scenario(
     intent='restaurant',
     api=RestaurantCrawler().request,
-    scenario_dict={
+    scenario={
         'LOCATION': [],
-        'TRAVEL': ['맛집']
+        'RESTAURANT': ['맛집']
+    }
+)
+
+travel = Scenario(
+    intent='travel',
+    api=MapCrawler().request,
+    scenario={
+        'LOCATION': [],
+        'PLACE': ['여행지']
     }
 )

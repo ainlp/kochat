@@ -3,12 +3,13 @@
 @since 7/1/2020
 @see https://github.com/gusdnd852
 """
+from flask import render_template
 from kochat.app import KochatApi
 from kochat.data import Dataset
 from kochat.loss import CenterLoss, CRFLoss
 from kochat.model import intent, embed, entity
 from kochat.proc import DistanceClassifier, GensimEmbedder, EntityRecognizer
-from demo.scenrios import weather, dust, travel, restaurant
+from demo.scenrios import restaurant, travel, dust, weather
 
 dataset = Dataset(ood=True)
 emb = GensimEmbedder(model=embed.FastText())
@@ -25,11 +26,18 @@ rcn = EntityRecognizer(
 
 kochat = KochatApi(
     dataset=dataset,
-    embed_processor=emb,
-    intent_classifier=clf,
-    entity_recognizer=rcn,
+    embed=emb, intent=clf, entity=rcn,
+    # fit_embed=True, fit_intent=True, fit_entity=True,
     scenarios=[weather, dust, travel, restaurant]
 )
 
-kochat.fit_all()
-kochat.run(port=8081)
+
+@kochat.app.route('/')
+def index():
+    return render_template("index.html")
+
+
+if __name__ == '__main__':
+    kochat.app.template_folder = 'templates'
+    kochat.app.static_folder = 'static'
+    kochat.app.run(port=8080, host='0.0.0.0')
