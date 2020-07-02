@@ -26,9 +26,12 @@ rcn = EntityRecognizer(
 
 kochat = KochatApi(
     dataset=dataset,
-    embed=emb, intent=clf, entity=rcn,
-    # fit_embed=True, fit_intent=True, fit_entity=True,
-    scenarios=[weather, dust, travel, restaurant]
+    embed_processor=(emb, True),
+    intent_classifier=(clf, True),
+    entity_recognizer=(rcn, True),
+    scenarios=[
+        weather, dust, travel, restaurant
+    ]
 )
 
 

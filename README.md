@@ -30,10 +30,13 @@ rcn = EntityRecognizer(
 
 # 5. 딥러닝 챗봇 RESTful API 학습 & 빌드
 kochat = KochatApi(
-    dataset=dataset,
-    embed=emb, intent=clf, entity=rcn,
-    fit_embed=True, fit_intent=True, fit_entity=True,
-    scenarios=[weather, dust, travel, restaurant]
+    dataset=dataset, 
+    embed_processor=(emb, True), 
+    intent_classifier=(clf, True),
+    entity_recognizer=(rcn, True), 
+    scenarios=[
+        weather, dust, travel, restaurant
+    ]
 )
 
 # 6. View 소스파일과 연결                                                                                                        
@@ -49,7 +52,7 @@ if __name__ == '__main__':
 ```
 <br><br>
 
-### Why Kochat?
+## Why Kochat?
 - 한국어를 지원하는 최초의 오픈소스 딥러닝 챗봇 프레임워크입니다. (빌더와는 다릅니다.)
 - 다양한 Pre built-in 모델과 Loss함수를 지원합니다. NLP를 잘 몰라도 챗봇을 만들 수 있습니다.
 - 자신만의 커스텀 모델, Loss함수를 적용할 수 있습니다. NLP 전문가에겐 더욱 유용합니다.
@@ -229,7 +232,7 @@ Slot Filling 방식은 미리 기능을 수행할 정보를 담는 '슬롯'을 �
 
 Kochat은 이렇게 단순히 문장들의 벡터 Cosine 유사도를 비교하지 않고 
 더욱 고차원적인 방법을 사용하여 Fallback 디텍션을 보다 더 잘 수행하도록
-설계하였는데 이에 대한 자세한 내용은 "5. Usage"에서 언급하도록 하겠습니다.
+설계하였는데 이에 대한 자세한 내용은 아래의 Usage에서 자세히 언급하도록 하겠습니다.
 <br><br>
 
 #### 3.2.2.3. 엔티티(개체명) 인식하기 : 슬롯 채우기
@@ -1052,10 +1055,9 @@ INTENT = {
 
 그러나 지금 버전에서는 가급적 OOD 데이터셋을 추가해서 이용해주세요. 
 정 없으시면 제가 데모 폴더에 넣어놓은 데이터라도 넣어서 자동화해서 쓰는게 
-성능 훨씬 좋습니다. 몇몇 빌더들은 이 임계치를 직접 정하게 하거나 그냥 상수로 
+훨씬 성능이 좋습니다. 몇몇 빌더들은 이 임계치를 직접 정하게 하거나 그냥 상수로 
 fix해놓는데, 개인적으로 이걸 그냥 상수로 fix 해놓거나 유저보고 직접 정하게 하는건 
-챗봇 빌더로서, 혹은 프레임워크로서 너무 무책임한 것 아닌가 싶습니다. 
-(심지어 그런 빌더들은 metric이 뭔지도 모르는데 유저가 그걸 어떻게 정하라는건지..)
+챗봇 빌더로서, 혹은 프레임워크로서 무책임한 것 아닌가 싶습니다. 
 <br><br><br>
 
 #### 4.3.5. `from kochat.proc import EntityRecongnizer`
@@ -1332,7 +1334,9 @@ reservation_scenario = Scenario(
 
 #### 4.5.2. `from kochat.app import KochatApi`
 `KochatApi`는 Flask로 구현되었으며 restful api를 제공하는 클래스입니다.
-아래와 같은 메소드들을 지원하며 사용법은 다음과 같습니다.
+사실 서버로 구동할 계획이라면 위에서 설명한 것 보다 훨씬 쉽게 학습할 수 있습니다. 
+(학습의 많은 부분들이 `KochatApi`에서 자동화 되기 때문에 파라미터 전달만으로 학습이 가능합니다.)
+`KochatApi` 클래스는 아래와 같은 메소드들을 지원하며 사용법은 다음과 같습니다.
 
 ```python
 from kochat.app import KochatApi
@@ -1341,9 +1345,12 @@ from kochat.app import KochatApi
 # kochat api 객체를 생성합니다.
 kochat = KochatApi(
     dataset=dataset, # 데이터셋 객체
-    embed=emb, intent=clf, entity=rcn, # 임베딩, 인텐트, 엔티티 프로세서
-    fit_embed=True, fit_intent=True, fit_entity=True, # 각 프로세서 학습 여부
-    scenarios=[weather, dust, travel, restaurant] # 시나리고 객체 리스트
+    embed_processor=(emb, True), # 임베딩 프로세서, 학습여부
+    intent_classifier=(clf, True), # 인텐트 분류기, 학습여부
+    entity_recognizer=(rcn, True), # 엔티티 검출기, 학습여부
+    scenarios=[ #시나리오 리스트
+        weather, dust, travel, restaurant
+    ]
 )
 
 # kochat.app은 FLask 객체입니다. 
@@ -1366,20 +1373,64 @@ if __name__ == '__main__':
 위 예시처럼 뷰를 직접 서버에 연결해서 하나의 서버에서 뷰와 딥러닝 코드를 
 모두 구동시킬 수도 있고, 만약 Micro Service Architecture를 구성해야한다면,
 챗봇 서버의 index route ('/')등을 설정하지 않고 딥러닝 백엔드 서버로도
-충분히 활용할 수 있습니다. 
+충분히 활용할 수 있습니다. 만약 학습을 원하지 않을 때는 아래처럼 구현합니다.
+
+```python
+# 1. Tuple의 두번째 인자에 False 입력
+kochat = KochatApi(
+    dataset=dataset, # 데이터셋 객체
+    embed_processor=(emb, False), # 임베딩 프로세서, 학습여부
+    intent_classifier=(clf, False), # 인텐트 분류기, 학습여부
+    entity_recognizer=(rcn, False), # 엔티티 검출기, 학습여부
+    scenarios=[ #시나리오 리스트
+        weather, dust, travel, restaurant
+    ]
+)
+
+# 2. Tuple에 프로세서만 입력
+kochat = KochatApi(
+    dataset=dataset, # 데이터셋 객체
+    embed_processor=(emb), # 임베딩 프로세서
+    intent_classifier=(clf), # 인텐트 분류기
+    entity_recognizer=(rcn), # 엔티티 검출기
+    scenarios=[ #시나리오 리스트
+        weather, dust, travel, restaurant
+    ]
+)
+
+# 3. 그냥 프로세서만 입력
+kochat = KochatApi(
+    dataset=dataset, # 데이터셋 객체
+    embed_processor=emb, # 임베딩 프로세서
+    intent_classifier=clf, # 인텐트 분류기
+    entity_recognizer=rcn, # 엔티티 검출기
+    scenarios=[ #시나리오 리스트
+        weather, dust, travel, restaurant
+    ]
+)
+```
 
 <br>
 
 아래에서는 Kochat 서버의 url 패턴에 대해 자세하게 설명합니다.
 현재 kochat api는 다음과 같은 4개의 url 패턴을 지원하며,
-자세한 사용 용도는 Demo application에서 확인하실 수 있습니다.
+이 url 패턴들은 config의 API 챕터에서 변경 가능합니다.
+
+```python
+API = {
+    'request_chat_url_pattern': 'request_chat',  # request_chat 기능 url pattern
+    'fill_slot_url_pattern': 'fill_slot',  # fill_slot 기능 url pattern
+    'get_intent_url_pattern': 'get_intent',  # get_intent 기능 url pattern
+    'get_entity_url_pattern': 'get_entity'  # get_entity 기능 url pattern
+}
+```
 
 <br>
 
 #### 4.5.2.1. request_chat
-가장 기본적인 request_chat입니다. intent분류, entity검출, api연결을 한번에 진행합니다.
+가장 기본적인 패턴인 request_chat입니다. intent분류, entity검출, api연결을 한번에 진행합니다.
 <br>
-기본 패턴 : https://youripaddress/request/<uid>/<text>
+기본 패턴 : https://youripaddress/request_chat/<uid>/<text>
 ```
 case 1. state SUCCESS
 모든 entity가 정상적으로 입력된 경우 state 'SUCCESS'를 반환합니다.
@@ -1603,17 +1654,61 @@ PROC = {
 이 챕터는 Kochat의 다양한 성능 이슈에 대해 기록합니다.
 <br><br>
 
-#### 7.1. DistanceClassifier는 CNN이 더 좋다.
-Distance Classification의 경우 LSTM보다 CNN의 Feature들이 클래스별로 훨씬 잘 구분되는 것을 확인했습니다.
-Feature Extraction 능력 자체는 CNN이 좋다고 알려진 것처럼 아무래도 CNN이 Feature를 더 잘 뽑아내는 것 같습니다.
-Feature Space에서 구분이 잘 된다는 것은 OOD 성능이 우수하다는 것과 동치이므로, LSTM보단
-CNN을 사용하는 것이 더욱 바람직해보입니다.
+#### 7.1. 얼굴인식 영역에서 쓰이던 Loss 함수들은 Fallback 디텍션에 효과적이다.
+사실 CenterLoss나 CosFace 같은 Margin Loss함수들이 컴퓨터 비전의 얼굴인식 영역에서 
+많이 쓰인다고는 하나 기본적으로 모든 Retrieval 문제에 적용할 수 있는 Loss함수입니다.
+Kochat의 DistanceClassifier는 거리기반의 Retrieval을 수행하기 때문에 이러한
+Loss함수를 매우 효과적으로 활용할 수 있습니다. 실제로 데모 데이터셋에 적용했을 때
+CrossEntropyLoss로는 70% 언저리인 FallbackDetection 성능이 CenterLoss, CosFace 
+등을 적용하면 90~95%까지 향상되었습니다. (120개의 OOD 샘플 테스트)
 <br><br>
 
-#### 7.2. CRF Loss의 수렴 속도는 느리다.
+- SoftmaxClassifier + CrossEntropyLoss + CNN (d_model=512, layers=1)
+
+![](https://user-images.githubusercontent.com/38183241/86393797-834c6080-bcd8-11ea-86f0-3fc4c897382d.png)
+
+<br>
+
+- DistanceClassifier + CrossEntropyLoss + CNN (d_model=512, layers=1)
+
+![](https://user-images.githubusercontent.com/38183241/86393467-1638cb00-bcd8-11ea-8d04-d663ce89d124.png)
+
+<br>
+
+- DistanceClassifier + CenterLoss + CNN (d_model=512, layers=1)
+
+![](https://user-images.githubusercontent.com/38183241/86323442-d17d4780-bc77-11ea-8c15-8be1eb4fa6e5.png)
+
+<br>
+
+
+#### 7.2. Retrieval Feature로는 LSTM보다 CNN이 더 좋다.
+Retrieval 기반의 Distance Classification의 경우 LSTM보다 CNN의 Feature들이 
+클래스별로 훨씬 잘 구분되는 것을 확인했습니다. Feature Extraction 능력 자체는 
+CNN이 좋다고 알려진 것처럼 아무래도 CNN이 Feature를 더 잘 뽑아내는 것 같습니다.
+Feature Space에서 구분이 잘 된다는 것은 OOD 성능이 우수하다는 것과 동치이므로, 
+DistanceClassifier 사용시 LSTM보단 CNN을 사용하는 것이 더욱 바람직해보입니다.
+<br><br>
+
+- 좌 : LSTM (d_model=512, layers=1) + CosFace, 500 Epoch 학습 (수렴함)
+- 우 : CNN (d_model=512, layers=1) + CosFace, 500 Epoch 학습 (수렴함)
+
+![image](https://user-images.githubusercontent.com/38183241/86394150-0ff71e80-bcd9-11ea-97c8-e0939b8f3f5d.png)
+
+<br><br>
+
+#### 7.3. CRF Loss의 수렴 속도는 CrossEntropy보다 느리다.
+
 EntityRecognizer의 경우 동일 사이즈, 동일 Layer에서 CRF Loss를 사용하면
-더 느리게 수렴하는 것을 확인했습니다. CRF의 경우 조금 더 많은 학습 시간을 줘야 
-제 성능을 내는 것 같습니다.
+확실히 성능은 더욱 우수해지나, 조금 더 더 느리게 수렴하는 것을 확인했습니다. 
+CRF Loss의 경우 조금 더 많은 학습 시간을 줘야 제 성능을 내는 것 같습니다.
+<br><br>
+
+- 좌 : LSTM (d_model=512, layers=1) + CrossEntropy → Epoch 300에 f1-score 90% 도달
+- 우 : LSTM (d_model=512, layers=1) + CRFLoss → Epoch 450에 f1-score 90% 도달
+
+![](https://user-images.githubusercontent.com/38183241/86394923-4bdeb380-bcda-11ea-9d70-ec4da761893b.png)
+
 <br><br>
 
 #### 7.3. FallbackDetector의 max_iter는 높게 설정해야한다.

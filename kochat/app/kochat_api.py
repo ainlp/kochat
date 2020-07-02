@@ -5,28 +5,25 @@ from flask import Flask
 from kochat.app.scenario import Scenario
 from kochat.app.scenario_manager import ScenarioManager
 from kochat.data.dataset import Dataset
-from kochat.proc.base_processor import BaseProcessor
 
 
+@api
 class KochatApi:
 
     def __init__(self,
                  dataset: Dataset,
-                 embed: BaseProcessor,
-                 intent: BaseProcessor,
-                 entity: BaseProcessor,
-                 fit_embed: bool = False,
-                 fit_intent: bool = False,
-                 fit_entity: bool = False,
-                 fit_all: bool = True,
+                 embed_processor,
+                 intent_classifier,
+                 entity_recognizer,
                  scenarios: List[Scenario] = None):
+
         """
         Flask를 이용해 구현한 RESTFul API 클래스입니다.
 
         :param dataset: 데이터셋 객체
-        :param embed: 임베딩 프로세서 객체
-        :param intent: 인텐트 분류기 객체
-        :param entity: 개체명 인식기 객체
+        :param embed_processor: 임베딩 프로세서 객체 or (, 학습여부)
+        :param intent_classifier: 인텐트 분류기 객체 or (, 학습여부)
+        :param entity_recognizer: 개체명 인식기 객체 or (, 학습여부)
         :param scenarios : 시나리오 리스트 (list 타입)
         """
 
@@ -34,24 +31,32 @@ class KochatApi:
         self.app.config['JSON_AS_ASCII'] = False
 
         self.dataset = dataset
-        self.embed_processor = embed
-        self.intent_classifier = intent
-        self.entity_recognizer = entity
         self.scenario_manager = ScenarioManager()
         self.dialogue_cache = {}
 
-        if fit_all:
-            self.__fit_embed()
-            self.__fit_intent()
-            self.__fit_entity()
+        self.embed_processor = embed_processor[0] \
+            if isinstance(embed_processor, tuple) \
+            else embed_processor
 
-        else:
-            if fit_embed:
-                self.__fit_embed()
-            if fit_intent:
-                self.__fit_intent()
-            if fit_entity:
-                self.__fit_entity()
+        self.intent_classifier = intent_classifier[0] \
+            if isinstance(intent_classifier, tuple) \
+            else intent_classifier
+
+        self.entity_recognizer = entity_recognizer[0] \
+            if isinstance(entity_recognizer, tuple) \
+            else entity_recognizer
+
+        if isinstance(embed_processor, tuple) \
+                and len(embed_processor) == 2 and embed_processor[1] is True:
+            self.__fit_embed()
+
+        if isinstance(intent_classifier, tuple) \
+                and len(intent_classifier) == 2 and intent_classifier[1] is True:
+            self.__fit_intent()
+
+        if isinstance(entity_recognizer, tuple) \
+                and len(entity_recognizer) == 2 and entity_recognizer[1] is True:
+            self.__fit_entity()
 
         for scenario in scenarios:
             self.scenario_manager.add_scenario(scenario)
@@ -63,7 +68,7 @@ class KochatApi:
         flask 함수들을 build합니다.
         """
 
-        @self.app.route('/request_chat/<uid>/<text>', methods=['GET'])
+        @self.app.route('/{}/<uid>/<text>'.format(self.request_chat_url_pattern), methods=['GET'])
         def request_chat(uid: str, text: str) -> dict:
             """
             문자열을 입력하면 intent, entity, state, answer 등을 포함한
@@ -81,7 +86,7 @@ class KochatApi:
             self.dialogue_cache[uid] = self.scenario_manager.apply_scenario(intent, entity, text)
             return self.dialogue_cache[uid]
 
-        @self.app.route('/fill_slot/<uid>/<text>', methods=['GET'])
+        @self.app.route('/{}/<uid>/<text>'.format(self.fill_slot_url_pattern), methods=['GET'])
         def fill_slot(uid: str, text: str) -> dict:
             """
             이전 대화에서 entity가 충분히 입력되지 않았을 때
@@ -97,12 +102,12 @@ class KochatApi:
             text = self.dataset.prep.tokenize(text, train=False)
             intent = self.dialogue_cache[uid]['intent']
 
-            text = text + self.dialogue_cache[uid]['input']  # 이전에 저장된 dict에 추가
-            entity = entity + self.dialogue_cache[uid]['entity']  # 이전에 저장된 dict에 추가
+            text = text + self.dialogue_cache[uid]['input']  # 이전에 저장된 dict 앞에 추가
+            entity = entity + self.dialogue_cache[uid]['entity']  # 이전에 저장된 dict 앞에 추가
             self.dialogue_cache[uid] = self.scenario_manager.apply_scenario(intent, entity, text)
             return self.dialogue_cache[uid]
 
-        @self.app.route('/get_intent/<text>', methods=['GET'])
+        @self.app.route('/{}/<text>'.format(self.get_intent_url_pattern), methods=['GET'])
         def get_intent(text: str) -> dict:
             """
             Intent Classification을 수행합니다.
@@ -121,7 +126,7 @@ class KochatApi:
                 'answer': None
             }
 
-        @self.app.route('/get_entity/<text>', methods=['GET'])
+        @self.app.route('/{}}/<text>'.format(self.get_entity_url_pattern), methods=['GET'])
         def get_entity(text: str) -> dict:
             """
             Entity Recognition을 수행합니다.
@@ -143,29 +148,20 @@ class KochatApi:
     def __fit_intent(self):
         """
         Intent Classifier를 학습합니다.
-
-        :return: 학습된 IntentClassifier
         """
 
         self.intent_classifier.fit(self.dataset.load_intent(self.embed_processor))
-        return self.intent_classifier
 
     def __fit_entity(self):
         """
         Entity Recognizr를 학습합니다.
-
-        :return: 학습된 Entity Recognizr
         """
 
         self.entity_recognizer.fit(self.dataset.load_entity(self.embed_processor))
-        return self.entity_recognizer
 
     def __fit_embed(self):
         """
         Embedding을 학습합니다.
-
-        :return: 학습된 Embedding
         """
 
         self.embed_processor.fit(self.dataset.load_embed())
-        return self.embed_processor

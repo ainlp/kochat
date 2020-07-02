@@ -114,3 +114,10 @@ ENTITY = {
     'lr_scheduler_min_lr': 1e-12,  # 최소 러닝레이트
     'lr_scheduler_warm_up': 100  # 러닝레이트 감소 시작시점
 }
+
+API = {
+    'request_chat_url_pattern': 'request_chat',  # request_chat 기능 url pattern
+    'fill_slot_url_pattern': 'fill_slot',  # fill_slot 기능 url pattern
+    'get_intent_url_pattern': 'get_intent',  # get_intent 기능 url pattern
+    'get_entity_url_pattern': 'get_entity'  # get_entity 기능 url pattern
+}
