@@ -1587,9 +1587,8 @@ config에서 변경할 수 있습니다.
 <br><br>
 
 #### 5.5. Train/Test Confusion Matrix
-![](https://user-images.githubusercontent.com/38183241/86322539-2455ff80-bc76-11ea-94d5-9a83d0eb1cf5.png)
 
-![](https://user-images.githubusercontent.com/38183241/86322538-23bd6900-bc76-11ea-9953-f0ab7ee7150b.png)
+![](https://user-images.githubusercontent.com/38183241/86396855-b47b5f80-bcdd-11ea-9672-4adf0f0ed140.png)
 
 Confusion Matrix의 경우는 X축(아래)가 Prediction, Y축(왼쪽)이 Label입니다. 
 <br>다음 버전에서 xticks와 yticks를 추가할 예정입니다.
@@ -1601,9 +1600,7 @@ Confusion Matrix의 경우는 X축(아래)가 Prediction, Y축(왼쪽)이 Label�
 Accuracy, Precision, Recall, F1 Score 등 모델을 다양한 메트릭으로 평가하고,
 표 형태로 이미지파일을 만들어줍니다.
 
-![](https://user-images.githubusercontent.com/38183241/86322537-2324d280-bc76-11ea-962b-80d23e701691.png)
-
-![](https://user-images.githubusercontent.com/38183241/86322534-228c3c00-bc76-11ea-923e-1a0d9b3ad107.png)
+![](https://user-images.githubusercontent.com/38183241/86397411-b8f44800-bcde-11ea-8b66-22423c12584c.png)
 
 <br>
 
