@@ -74,6 +74,67 @@ if __name__ == '__main__':
 <br><br><br>
 
 ## Table of contents
+- [1. Kochat 이란?](https://github.com/gusdnd852/kochat#1-kochat-%EC%9D%B4%EB%9E%80)
+    - [1.1. 기존 챗봇 빌더와의 차이점](https://github.com/gusdnd852/kochat#11-%EA%B8%B0%EC%A1%B4-%EC%B1%97%EB%B4%87-%EB%B9%8C%EB%8D%94%EC%99%80%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90)
+    - [1.2. Kochat 제작 동기](https://github.com/gusdnd852/kochat#12-kochat-%EC%A0%9C%EC%9E%91-%EB%8F%99%EA%B8%B0)
+- [2. About Chatbot](https://github.com/gusdnd852/kochat#2-about-chatbot)
+    - [2.1. 챗봇의 분류](https://github.com/gusdnd852/kochat#21-%EC%B1%97%EB%B4%87%EC%9D%98-%EB%B6%84%EB%A5%98)
+    - [2.2. 챗봇의 구현](https://github.com/gusdnd852/kochat#22-%EC%B1%97%EB%B4%87%EC%9D%98-%EA%B5%AC%ED%98%84)
+        - [2.2.1. Open domain 챗봇](https://github.com/gusdnd852/kochat#221-open-domain-%EC%B1%97%EB%B4%87)
+        - [2.2.2. Close domain 챗봇](https://github.com/gusdnd852/kochat#222-close-domain-%EC%B1%97%EB%B4%87)
+            - [2.2.2.1. 인텐트(의도) 분류하기 : 슬롯 고르기](https://github.com/gusdnd852/kochat#2221-%EC%9D%B8%ED%85%90%ED%8A%B8%EC%9D%98%EB%8F%84-%EB%B6%84%EB%A5%98%ED%95%98%EA%B8%B0--%EC%8A%AC%EB%A1%AF-%EA%B3%A0%EB%A5%B4%EA%B8%B0)
+            - [2.2.2.2. 폴백 검출하기 : 모르겠으면 모른다고 말하기](https://github.com/gusdnd852/kochat#2222-%ED%8F%B4%EB%B0%B1-%EA%B2%80%EC%B6%9C%ED%95%98%EA%B8%B0--%EB%AA%A8%EB%A5%B4%EA%B2%A0%EC%9C%BC%EB%A9%B4-%EB%AA%A8%EB%A5%B8%EB%8B%A4%EA%B3%A0-%EB%A7%90%ED%95%98%EA%B8%B0)
+            - [2.2.2.3. 엔티티(개체명) 인식하기 : 슬롯 채우기](https://github.com/gusdnd852/kochat#2223-%EC%97%94%ED%8B%B0%ED%8B%B0%EA%B0%9C%EC%B2%B4%EB%AA%85-%EC%9D%B8%EC%8B%9D%ED%95%98%EA%B8%B0--%EC%8A%AC%EB%A1%AF-%EC%B1%84%EC%9A%B0%EA%B8%B0)
+            - [2.2.2.4. API 호출하기 : 대답 생성하기](https://github.com/gusdnd852/kochat#2224-%EB%8C%80%EB%8B%B5-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0)
+- [3. Getting Started](https://github.com/gusdnd852/kochat#3-getting-started)
+    - [3.1. Requirements](https://github.com/gusdnd852/kochat#31-requirements)
+    - [3.2. pip install](https://github.com/gusdnd852/kochat#32-pip-install)
+    - [3.3. Dependencies](https://github.com/gusdnd852/kochat#33-dependencies)
+    - [3.4 Configuration 파일 추가하기](https://github.com/gusdnd852/kochat#34-configuration-%ED%8C%8C%EC%9D%BC-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0)
+    - [3.5 데이터셋 넣기](https://github.com/gusdnd852/kochat#35-%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B-%EB%84%A3%EA%B8%B0)
+        - [3.5.1. 데이터 포맷](https://github.com/gusdnd852/kochat#351-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%8F%AC%EB%A7%B7)
+        - [3.5.2. 데이터셋 저장 경로](https://github.com/gusdnd852/kochat#352-%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B-%EC%A0%80%EC%9E%A5-%EA%B2%BD%EB%A1%9C)
+        - [3.5.3. 인텐트 단위로 파일 분할](https://github.com/gusdnd852/kochat#353-%EC%9D%B8%ED%85%90%ED%8A%B8-%EB%8B%A8%EC%9C%84%EB%A1%9C-%ED%8C%8C%EC%9D%BC-%EB%B6%84%ED%95%A0)
+        - [3.5.4. 파일의 헤더(컬럼명) 설정](https://github.com/gusdnd852/kochat#354-%ED%8C%8C%EC%9D%BC%EC%9D%98-%ED%97%A4%EB%8D%94%EC%BB%AC%EB%9F%BC%EB%AA%85-%EC%84%A4%EC%A0%95)
+        - [3.5.5. 라벨링 실수 검출](https://github.com/gusdnd852/kochat#355-%EB%9D%BC%EB%B2%A8%EB%A7%81-%EC%8B%A4%EC%88%98-%EA%B2%80%EC%B6%9C)
+        - [3.5.6. OOD 데이터셋](https://github.com/gusdnd852/kochat#356-ood-%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B)
+- [4. Usage](https://github.com/gusdnd852/kochat#4-usage)
+    - [4.1. from kochat.data](https://github.com/gusdnd852/kochat#41-from-kochatdata)
+    - [4.2. from kochat.model](https://github.com/gusdnd852/kochat#42-from-kochatmodel)
+        - [4.2.1. embed 모델](https://github.com/gusdnd852/kochat#421-embed-%EB%AA%A8%EB%8D%B8)
+        - [4.2.2. intent 모델](https://github.com/gusdnd852/kochat#422-intent-%EB%AA%A8%EB%8D%B8)
+        - [4.2.3. entity 모델](https://github.com/gusdnd852/kochat#423-entity-%EB%AA%A8%EB%8D%B8)
+        - [4.2.4. 커스텀 모델](https://github.com/gusdnd852/kochat#424-%EC%BB%A4%EC%8A%A4%ED%85%80-%EB%AA%A8%EB%8D%B8)
+            - [4.2.4.1. 커스텀 Gensim embed 모델](https://github.com/gusdnd852/kochat#4241-%EC%BB%A4%EC%8A%A4%ED%85%80-gensim-embed-%EB%AA%A8%EB%8D%B8)
+            - [4.2.4.2. 커스텀 Intent 모델](https://github.com/gusdnd852/kochat#4242-%EC%BB%A4%EC%8A%A4%ED%85%80-intent-%EB%AA%A8%EB%8D%B8)
+            - [4.2.4.3. 커스텀 Entity 모델](https://github.com/gusdnd852/kochat#4243-%EC%BB%A4%EC%8A%A4%ED%85%80-entity-%EB%AA%A8%EB%8D%B8)
+        - [4.3. from kochat.proc](https://github.com/gusdnd852/kochat#43-from-kochatproc)
+            - [4.3.1. from kochat.proc import GensimEmbedder](https://github.com/gusdnd852/kochat#431-from-kochatproc-import-gensimembedder)
+            - [4.3.2. from kochat.proc import SoftmaxClassifier](https://github.com/gusdnd852/kochat#432-from-kochatproc-import-softmaxclassifier)
+            - [4.3.3. from kochat.proc import DistanceClassifier](https://github.com/gusdnd852/kochat#432-from-kochatproc-import-softmaxclassifier)
+            - [4.3.4. FallbackDetector](https://github.com/gusdnd852/kochat#434-fallbackdetector)
+            - [4.3.5. from kochat.proc import EntityRecongnizer](https://github.com/gusdnd852/kochat#435-from-kochatproc-import-entityrecongnizer)
+        - [4.4. from kochat.loss](https://github.com/gusdnd852/kochat#44-from-kochatloss)
+            - [4.4.1. intent loss 함수](https://github.com/gusdnd852/kochat#441-intent-loss-%ED%95%A8%EC%88%98)
+            - [4.4.2. entity loss 함수](https://github.com/gusdnd852/kochat#442-entity-loss-%ED%95%A8%EC%88%98)
+            - [4.4.3. 커스텀 loss 함수](https://github.com/gusdnd852/kochat#443-%EC%BB%A4%EC%8A%A4%ED%85%80-loss-%ED%95%A8%EC%88%98)
+        - [4.5. from kochat.app](https://github.com/gusdnd852/kochat#45-from-kochatapp)
+            - [4.5.1 from kochat.app import Scenario](https://github.com/gusdnd852/kochat#451-from-kochatapp-import-scenario)
+            - [4.5.2. from kochat.app import KochatApi](https://github.com/gusdnd852/kochat#452-from-kochatapp-import-kochatapi)
+                - [4.5.2.1. request_chat](https://github.com/gusdnd852/kochat#4521-request_chat)
+                - [4.5.2.2. fill_slot](https://github.com/gusdnd852/kochat#4522-fill_slot)
+                - [4.5.2.3. get_intent](https://github.com/gusdnd852/kochat#4523-get_intent)
+                - [4.5.2.4. get_entity](https://github.com/gusdnd852/kochat#4524-get_entity)
+- [5. Visualization Support](https://github.com/gusdnd852/kochat#5-visualization-support)
+    - [5.1. Train/Test Accuracy](https://github.com/gusdnd852/kochat#51-traintest-accuracy)
+    - [5.2. Train/Test Recall (macro average)](https://github.com/gusdnd852/kochat#52-traintest-recall-macro-average)
+    - [5.3. Train/Test Precision (macro average)](https://github.com/gusdnd852/kochat#53-traintest-precision-macro-average)
+    - [5.4. Train/Test F1-Score (macro average)](https://github.com/gusdnd852/kochat#54-traintest-f1-score-macro-average)
+    - [5.5. Train/Test Confusion Matrix](https://github.com/gusdnd852/kochat#55-traintest-confusion-matrix)
+    - [5.6. Train/Test Classification Performance Report](https://github.com/gusdnd852/kochat#56-traintest-classification-performance-report)
+    - [5.7. Train/Test Fallback Detection Performance Report](https://github.com/gusdnd852/kochat#57-traintest-fallback-detection-performance-report)
+    - [5.8. Feature Space Visualization](https://github.com/gusdnd852/kochat#58-feature-space-visualization)
+        
 <br><br><br>
 
 
@@ -240,7 +301,7 @@ Kochat은 이렇게 단순히 문장들의 벡터 Cosine 유사도를 비교하�
 설계하였는데 이에 대한 자세한 내용은 아래의 Usage에서 자세히 언급하도록 하겠습니다.
 <br><br>
 
-#### 3.2.2.3. 엔티티(개체명) 인식하기 : 슬롯 채우기
+#### 2.2.2.3. 엔티티(개체명) 인식하기 : 슬롯 채우기
 
 ![chatbot_entity_recognition](https://user-images.githubusercontent.com/38183241/85957992-17fb4980-b9cd-11ea-9a57-de36bc37a979.jpg)
 
@@ -251,7 +312,7 @@ Kochat은 이렇게 단순히 문장들의 벡터 Cosine 유사도를 비교하�
 지역에 관련된 정보는 아직 찾아내지 못했기 때문에 다시 되물어서 찾아내야합니다. 
 <br><br>
 
-#### 2.2.2.4. 대답 생성하기
+#### 2.2.2.4. API 호출하기 : 대답 생성하기
 
 ![chatbot_response_generation](https://user-images.githubusercontent.com/38183241/85957995-19c50d00-b9cd-11ea-8f88-50fea23df8d5.jpg)
 
@@ -1653,11 +1714,12 @@ PROC = {
 ```
 <br><br>
 
-## 7. Performance Issue
+## 6. Performance Issue
 이 챕터는 Kochat의 다양한 성능 이슈에 대해 기록합니다.
+
 <br><br>
 
-#### 7.1. 얼굴인식 영역에서 쓰이던 Loss 함수들은 Fallback 디텍션에 효과적이다.
+#### 6.1. 얼굴인식 영역에서 쓰이던 Loss 함수들은 Fallback 디텍션에 효과적이다.
 사실 CenterLoss나 CosFace 같은 Margin Loss함수들이 컴퓨터 비전의 얼굴인식 영역에서 
 많이 쓰인다고는 하나 기본적으로 모든 Retrieval 문제에 적용할 수 있는 Loss함수입니다.
 Kochat의 DistanceClassifier는 거리기반의 Retrieval을 수행하기 때문에 이러한
@@ -1685,7 +1747,7 @@ CrossEntropyLoss로는 70% 언저리인 FallbackDetection 성능이 CenterLoss, 
 <br>
 
 
-#### 7.2. Retrieval Feature로는 LSTM보다 CNN이 더 좋다.
+#### 6.2. Retrieval Feature로는 LSTM보다 CNN이 더 좋다.
 Retrieval 기반의 Distance Classification의 경우 LSTM보다 CNN의 Feature들이 
 클래스별로 훨씬 잘 구분되는 것을 확인했습니다. Feature Extraction 능력 자체는 
 CNN이 좋다고 알려진 것처럼 아무래도 CNN이 Feature를 더 잘 뽑아내는 것 같습니다.
@@ -1700,7 +1762,7 @@ DistanceClassifier 사용시 LSTM보단 CNN을 사용하는 것이 더욱 바람
 
 <br><br>
 
-#### 7.3. CRF Loss의 수렴 속도는 CrossEntropy보다 느리다.
+#### 6.3. CRF Loss의 수렴 속도는 CrossEntropy보다 느리다.
 
 EntityRecognizer의 경우 동일 사이즈, 동일 Layer에서 CRF Loss를 사용하면
 확실히 성능은 더욱 우수해지나, 조금 더 더 느리게 수렴하는 것을 확인했습니다. 
@@ -1714,14 +1776,14 @@ CRF Loss의 경우 조금 더 많은 학습 시간을 줘야 제 성능을 내�
 
 <br><br>
 
-#### 7.3. FallbackDetector의 max_iter는 높게 설정해야한다.
+#### 6.4. FallbackDetector의 max_iter는 높게 설정해야한다.
 Fallback Detector는 sklearn 모델들을 활용하는데 기존 sklearn모델들은
 max_iter의 default값이 100으로 설정되어 수렴하기 전에 학습이 끝나버립니다.
 때문에 Fallback Detector를 config에 정의할때 max_iter를 높게 설정해야
 충분한 학습시간을 보장받을 수 있습니다.
 <br><br><br>
 
-## 8. Demo Application
+## 7. Demo Application
 
 이 챕터에서는 Demo 애플리케이션에 대해 소개합니다. 
 데모 애플리케이션은 여행정보를 소개하는 챗봇 애플리케이션으로,
@@ -1730,7 +1792,7 @@ Api는 Kochat을 만들면서 함께 만든 [Kocrawl](https://github.com/gusdnd8
 을 사용했습니다. 
 <br><br>
 
-### 8.1. View
+### 7.1. View (HTML)
 Html과 CSS를 사용하여 View를 구현하였습니다. 제가 디자인 한 것은 아니고 
 [여기](https://bootsnipp.com/snippets/ZlkBn) 에서 제공되는 
 부트스트랩 테마를 사용하였습니다.
@@ -1795,7 +1857,7 @@ Html과 CSS를 사용하여 View를 구현하였습니다. 제가 디자인 한 
 ```
 <br><br>
 
-### 8.2. 딥러닝 모델 구성
+### 7.2. 딥러닝 모델 구성
 아래와 같은 모델 구성을 사용하였습니다. 
 
 ```python
@@ -1835,7 +1897,7 @@ if __name__ == '__main__':
 ```
 <br><br>
 
-### 8.3. 시나리오 구성
+### 7.3. 시나리오 구성
 Kocrawl을 이용해 4가지 의도에 맞는 시나리오를 구성하였습니다.
 ```python
 weather = Scenario(
@@ -1876,7 +1938,7 @@ travel = Scenario(
 ```
 <br><br>
 
-### 8.4. Javascript 구현 (+ Ajax)
+### 7.4. Javascript 구현 (+ Ajax)
 마지막으로 버튼을 누르면 메시지가 띄워지는 애니메이션과 Ajax를 통해
 Kochat 서버와 통신하는 소스코드를 작성하였습니다. 간단한 chit chat 대화
 3가지 (안녕, 고마워, 없어)는 규칙기반으로 구현하였습니다. 추후에
@@ -2022,7 +2084,7 @@ function onSendButtonClicked() {
 ```
 <br><br>
 
-### 8.5. 실행 결과
+### 7.5. 실행 결과
 
 ![](https://user-images.githubusercontent.com/38183241/86410173-4347a680-bcf5-11ea-9261-e272ad21ed36.gif)
 <br><br>
@@ -2039,12 +2101,12 @@ function onSendButtonClicked() {
 <br><br><br>
 
 
-## 9. Contributor
+## 8. Contributor
 만약 본인이 원하는 기능을 Kocchat에 추가하고 싶으시다면 언제든지 컨트리뷰션 할 수 있습니다.
 <br><br><br>
 
 
-## 10. TODO List
+## 9. TODO List
 - [x] ver 1.0 : 엔티티 학습에 CRF 및 로스 마스킹 추가하기 
 - [x] ver 1.0 : 상세한 README 문서 작성 및 PyPI 배포하기
 - [x] ver 1.0 : 간단한 웹 인터페이스 기반 데모 애플리케이션 제작하기
@@ -2059,15 +2121,15 @@ function onSendButtonClicked() {
 - [ ] ver 1.7 : 대화 흐름관리를 위한 Story 관리 기능 구현해서 추가하기
 <br><br><br>
 
-## 11. Reference
+## 10. Reference
 - [챗봇 분류 그림](https://towardsdatascience.com/chatbots-are-cool-a-framework-using-python-part-1-overview-7c69af7a7439)
 - [seq2seq 그림](https://mc.ai/implement-of-seq2seq-model/)
 - [Fallback Detection 그림](https://docs.smartly.ai/docs/intent-detection)
-- []
+- [데모 애플리케이션 템플릿](https://bootsnipp.com/snippets/ZlkBn)
 
 <br><br><br>
 
-## 12. License
+## 11. License
 ```
 Copyright 2020 Kochat.
 

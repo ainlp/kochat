@@ -21,7 +21,7 @@ setup(
     url='https://github.com/Kochat-framework/kochat',
     install_requires=read_file('requirements.txt', lambda f: list(
         filter(bool, map(str.strip, f)))),
-    packages=find_packages('kochat', exclude=['demo']),
+    packages=find_packages(exclude=['demo']),
 
     keywords=['chatbot', 'korean chatbot', 'kochat'],
     python_requires='>=3',
